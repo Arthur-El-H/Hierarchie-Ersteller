@@ -1,8 +1,0 @@
-{
-  "solution": {
-    "path": "bewerbungsgelände.sln",
-    "projects": [
-      "graphhTester\\graphhTester.csproj"
-    ]
-  }
-}
