@@ -82,12 +82,10 @@ namespace graphhTester
                 insertRep(node.nodeRep);
             }
         }
-
         int getRepIndex(NodeRepresenter noderep)
         {
             return visualTree[noderep.depth].FindIndex(a => a == noderep);
         }
-
         void removeFromDepth(NodeRepresenter noderep, NodeRepresenter rep = null) //in visual tree only - parenthood/childhood is organized seperately
         {
 
@@ -101,7 +99,6 @@ namespace graphhTester
 
             replaceDepth(noderep.depth);
         }
-
         public void insertRep(NodeRepresenter rep, bool specificIndex = false, int index = 0)
         {
             rep.depth = rep.parent.depth + 1;
@@ -110,7 +107,6 @@ namespace graphhTester
             if (specificIndex) { placeInDepth(rep, specificIndex, index); }
             else { placeInDepth(rep); }
         }
-
         public void createNewDepth()
         {
             visualTree.Add(new List<NodeRepresenter>());
@@ -162,7 +158,6 @@ namespace graphhTester
             rep.lastChildIndex = correctedIndex(rep);
             //indexForInsert(rep);
         }
-
         private void replaceDepth(int depth)
         {
             for (int i = 0; i < visualTree[depth].Count; i++)
@@ -176,7 +171,6 @@ namespace graphhTester
                 visualTree[depth][i].Top = new Point(newLoc.X    + 15, newLoc.Y);
             }
         }
-
         private void giveNewRowTo(int depth)
         {
             amountOfRows[depth]++;

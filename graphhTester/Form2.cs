@@ -35,8 +35,6 @@ namespace graphhTester
             control.createMasterRep(masterNode);
             control.createPen();
 
-
-
             yesBtn.Enabled = false;
             noBtn.Enabled = false;
             noBtn.Hide();
@@ -53,12 +51,10 @@ namespace graphhTester
 
         public Node masterNode;
         public Node varNode;
-        public Manager manager;
         void createmasterNode()
 
         {
             masterNode = new Node("master", depthtracker);
-            manager = new Manager(masterNode);
             masterNode.form1 = this;
             depthtracker.addNewRow();
             depthtracker.addToRow(0,masterNode);

@@ -61,7 +61,6 @@ namespace graphhTester
         void getNewElement(Node node)
         {
             newElement = node;
-            // take newElement in hashmap
         }
 
         void testList(List<Node> testNodes)
@@ -194,15 +193,6 @@ namespace graphhTester
 
         #endregion
 
-        public void showList(List<Node> nodes)
-        {
-
-            foreach (Node node in nodes)
-            {
-                form1.AddToShowcase(node.name);
-            }
-        }
-
         // Representer Code
         #region
 
@@ -237,6 +227,8 @@ namespace graphhTester
 
         #endregion
 
+        //arrows drawing
+        #region
         public void createPen()
         {
             pen = new Pen(Color.Black, 3);
@@ -285,13 +277,22 @@ namespace graphhTester
                 }
             }
         }
-
+        #endregion
         public void changeMarkedRep(NodeRepresenter rep)
         {
-            if(markedRep != null)markedRep.BackColor = Color.Green;
+            if (markedRep != null) markedRep.BackColor = Color.Green;
             markedRep = rep;
             rep.BackColor = Color.White;
             form1.setCurrentElement(rep.name);
         }
+        public void showList(List<Node> nodes)
+        {
+
+            foreach (Node node in nodes)
+            {
+                form1.AddToShowcase(node.name);
+            }
+        }
+
     }
 }

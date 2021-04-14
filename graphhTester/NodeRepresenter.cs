@@ -36,8 +36,6 @@ namespace graphhTester
             Debug.WriteLine(node.depth.ToString() + " ist depth meines nodes");
             Debug.WriteLine(depth.ToString() + " ist meine depth");
             Debug.WriteLine(lastChildIndex.ToString() + " ist mein lastChildIndex");
-
-            //base.OnClick(e);
         }
     }
 }

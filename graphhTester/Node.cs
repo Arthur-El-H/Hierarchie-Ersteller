@@ -41,8 +41,6 @@ namespace graphhTester
             depthtracker = depthtracker_;
             children = new List<Node>();
         }
-
-
         //int parentDegreeCounter;
         public List<Node> isPartOf(List<Node> outputNodes)
         {
@@ -57,7 +55,6 @@ namespace graphhTester
                 return (outputNodes);
             }
         }
-
         //potentiell zu Array, wenn childrensChildren getrackt würde (z.B. durch int bei jedem node und eins hochzählen bei parentParents nach Aufnahme neues Nodes
        public List<Node> includes(List<Node> output)
         {
@@ -68,7 +65,6 @@ namespace graphhTester
                 }
             return output;
         }
-
         Node getParent(int degree)
         {
             Node output = this;
@@ -78,7 +74,6 @@ namespace graphhTester
             }
             return output;
         }        
-
         public List<Node> isEqualTo(List<Node> outputNode)                        // Gibt sich selbst mit wert 0 zurück: Gut für markieren.
         {
             outputNode = depthtracker.getDepthList(this.depth);
@@ -86,7 +81,6 @@ namespace graphhTester
             outputNode.Remove(this);
             return outputNode;
         }
-
         public List<Node> hasNoRelationTo(List<Node> output)
         {            
             Node varNode = this.getParent(depth - 1);
