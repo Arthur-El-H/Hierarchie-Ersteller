@@ -102,7 +102,8 @@ namespace graphhTester
             switch (buttonState)
             {
                 case 1: enableButtons(false); control.goDeeper(); break;
-                case 2: enableButtons(false); if (control.levelFound)
+                case 2: enableButtons(false); 
+                    if (control.levelFound)
                     {
                         control.insertAsParentAndGoToNext();
                     }

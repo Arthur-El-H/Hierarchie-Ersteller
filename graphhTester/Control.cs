@@ -54,6 +54,7 @@ namespace graphhTester
         public void startTesting(String name, Node receiver)
         {
             getNewElement(new Node(name, depthtracker));
+            newElement.parent = masterNode; //10.5.
             testList(receiver.children);
             testedParent = receiver;
             testNext(1);
@@ -73,13 +74,13 @@ namespace graphhTester
             switch (state)
             {
                 case 1:
-                    if(toTest.Count < testCounter + 1) { insertFirstElement(); break; } //there is no next
+                    if (toTest.Count < testCounter + 1) { insertFirstElement(); break; } //there is no next
                     tested = toTest[testCounter];
                     testCounter++;
                     putToTest(1);
                     break;
                 case 2:
-                    if (toTest.Count < testCounter + 1) { clearUp(); break; } //there is no next
+                    if (toTest.Count < testCounter + 1) { clearUp(); break; } //there is no next and level is already found
                     tested = toTest[testCounter];
                     testCounter++;
                     putToTest(2);
@@ -89,6 +90,7 @@ namespace graphhTester
 
         public void insertFirstElement()
         {
+            Debug.WriteLine("when is this happening?");
             masterNode.amountOfIncluded++;
             //depthCounter++;
             if (depthtracker.getDepth() < depthCounter) { depthtracker.addNewRow(); }
@@ -130,7 +132,7 @@ namespace graphhTester
             levelFound = true;
             newElement.parent = testedParent;
             newElement.depth = depthCounter;
-            if (depthtracker.getDepth() <= newElement.depth) { depthtracker.addNewRow(); }//
+            if (depthtracker.getDepth() <= newElement.depth) { depthtracker.addNewRow(); }
             depthtracker.addToRow(newElement.depth - 1, newElement);
             testedParent.children.Add(newElement);
             createRep(newElement, true);
@@ -144,7 +146,7 @@ namespace graphhTester
         {
             depthtracker.remove(node);
             node.depth++;
-            if (depthtracker.getDepth() <= node.depth) { depthtracker.addNewRow(); }//
+            if (depthtracker.getDepth() <= node.depth) { depthtracker.addNewRow(); }
             depthtracker.addToRow(node.depth - 1, node);
         }
         public void insertAsParentAndGoToNext(bool firstTime = false)     //call if yes after first putToTest
@@ -208,6 +210,7 @@ namespace graphhTester
             noderep.parent.children.Add(noderep);
             noderep.BringToFront();
             noderep.Visible = true;
+            noderep.depth = rep.depth;
             noderep.Size = new Size(horizontalDistance/2, verticalDistance/2);
             form1.receiveRep(noderep);
             if(!asParent) visDepthTracker.insertRep(noderep);
