@@ -51,6 +51,7 @@ namespace graphhTester
             Debug.WriteLine(index + " für " + rep.name);
             return index;
         }
+
         List<Node> toNotCheck = new List<Node>();
         NodeRepresenter repsibling = new NodeRepresenter();//10.5.
         int testindex; //10.5.
@@ -69,11 +70,12 @@ namespace graphhTester
                 if ((repIndex + 1) < visualTree[newChild.depth].Count)
                 {
                     repsibling = visualTree[newChild.depth][repIndex + 1];//10.5.
-                    repsibling.lastChildIndex--;
+                    //repsibling.lastChildIndex--;
                     Debug.WriteLine(repsibling.name + " got it.");
                 }
                 //rep.depth = 0;
                 insertRep(rep, true, repIndex);
+                repsibling.lastChildIndex -= newChild.children.Count;
                 //testindex = visualTree[rep.parent.depth].FindIndex(a => a == rep.parent);//10.5.
             }
             Debug.WriteLine("Station 2: " + repsibling.lastChildIndex + " für " + repsibling.name);//10.5.
@@ -112,13 +114,14 @@ namespace graphhTester
                 for (int i = index; i < visualTree[noderep.parent.depth].Count; i++)
                 {
                 //10.5. if (visualTree[noderep.parent.depth][i].movedAlready)
-                {
-                    if (visualTree[noderep.parent.depth][i].lastChildIndex > 0)
+                    for (int j = 0; j < noderep.children.Count; j++)
                     {
-                        Debug.WriteLine(noderep.parent.name + " gets minus");
-                        visualTree[noderep.parent.depth][i].lastChildIndex--;
+                        if (visualTree[noderep.parent.depth][i].lastChildIndex > 0)
+                        {
+                            Debug.WriteLine(noderep.parent.name + " gets minus");
+                            visualTree[noderep.parent.depth][i].lastChildIndex--;
+                        }
                     }
-                }
                 }
 
             replaceDepth(noderep.depth);
