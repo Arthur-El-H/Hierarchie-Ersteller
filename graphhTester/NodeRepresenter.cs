@@ -16,6 +16,7 @@ namespace graphhTester
         public NodeRepresenter parent;
         public Control control;
         public bool movedAlready;
+        Color noderepColor = Color.FromArgb(255, 255, 103, 104);
 
         public Point Bottom;
         public Point Top;
@@ -27,7 +28,8 @@ namespace graphhTester
 
         public NodeRepresenter()
         {
-            BackColor = Color.Green;
+            BackColor = noderepColor;
+            TextAlign = ContentAlignment.MiddleCenter;
         }
         protected override void OnClick(EventArgs e)
         {

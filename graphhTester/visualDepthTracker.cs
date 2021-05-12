@@ -162,10 +162,10 @@ namespace graphhTester
             { 
                 Debug.WriteLine("test 1: ? " + rep.name); visualTree[rep.depth].Add(rep); test1++; 
             }
-            //else if (rep.parent.lastChildIndex == 0) 
-            //{ 
-            //    Debug.WriteLine("test 2: ? " + rep.name); visualTree[rep.depth].Insert(rep.parent.lastChildIndex, rep); test2++; 
-            //}
+            else if (rep.parent.lastChildIndex > visualTree[rep.depth].Count) 
+            { 
+                visualTree[rep.depth].Add(rep);
+            }
             else if (visualTree[rep.depth].Count  == rep.parent.lastChildIndex) 
             { 
                 Debug.WriteLine("test 3: ? " + rep.name); visualTree[rep.depth].Add(rep); test3++; 

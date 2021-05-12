@@ -40,6 +40,8 @@
             this.includeBtn = new System.Windows.Forms.Button();
             this.noRelationToBtn = new System.Windows.Forms.Button();
             this.currentElement = new System.Windows.Forms.Label();
+            this.exitBtn = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
             // yesBtn
@@ -64,19 +66,24 @@
             // 
             // newElementBtn
             // 
-            this.newElementBtn.Location = new System.Drawing.Point(1073, 51);
+            this.newElementBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(103)))), ((int)(((byte)(104)))));
+            this.newElementBtn.FlatAppearance.BorderSize = 0;
+            this.newElementBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.newElementBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.newElementBtn.Location = new System.Drawing.Point(1169, 76);
             this.newElementBtn.Name = "newElementBtn";
-            this.newElementBtn.Size = new System.Drawing.Size(126, 23);
+            this.newElementBtn.Size = new System.Drawing.Size(244, 49);
             this.newElementBtn.TabIndex = 2;
             this.newElementBtn.Text = "Add new Element";
-            this.newElementBtn.UseVisualStyleBackColor = true;
+            this.newElementBtn.UseVisualStyleBackColor = false;
             this.newElementBtn.Click += new System.EventHandler(this.newElementBtn_Click);
             // 
             // elementInput
             // 
-            this.elementInput.Location = new System.Drawing.Point(1073, 22);
+            this.elementInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(119)))), ((int)(((byte)(141)))));
+            this.elementInput.Location = new System.Drawing.Point(1169, 56);
             this.elementInput.Name = "elementInput";
-            this.elementInput.Size = new System.Drawing.Size(126, 23);
+            this.elementInput.Size = new System.Drawing.Size(244, 23);
             this.elementInput.TabIndex = 3;
             // 
             // newNodeqst
@@ -90,75 +97,125 @@
             // 
             // testBtn
             // 
-            this.testBtn.Location = new System.Drawing.Point(1124, 80);
+            this.testBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(56)))), ((int)(((byte)(89)))));
+            this.testBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.testBtn.Location = new System.Drawing.Point(897, 341);
             this.testBtn.Name = "testBtn";
             this.testBtn.Size = new System.Drawing.Size(75, 23);
             this.testBtn.TabIndex = 5;
             this.testBtn.Text = "Test";
-            this.testBtn.UseVisualStyleBackColor = true;
+            this.testBtn.UseVisualStyleBackColor = false;
             this.testBtn.Click += new System.EventHandler(this.testBtn_Click_1);
             // 
             // listShowCase
             // 
+            this.listShowCase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(119)))), ((int)(((byte)(141)))));
             this.listShowCase.HideSelection = false;
-            this.listShowCase.Location = new System.Drawing.Point(1025, 271);
+            this.listShowCase.Location = new System.Drawing.Point(1169, 380);
             this.listShowCase.Name = "listShowCase";
-            this.listShowCase.Size = new System.Drawing.Size(174, 444);
+            this.listShowCase.Size = new System.Drawing.Size(244, 471);
             this.listShowCase.TabIndex = 6;
             this.listShowCase.UseCompatibleStateImageBehavior = false;
             // 
             // isEqualToBtn
             // 
-            this.isEqualToBtn.Location = new System.Drawing.Point(1025, 213);
+            this.isEqualToBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(216)))), ((int)(((byte)(102)))));
+            this.isEqualToBtn.FlatAppearance.BorderSize = 0;
+            this.isEqualToBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.isEqualToBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.isEqualToBtn.Location = new System.Drawing.Point(1169, 230);
             this.isEqualToBtn.Name = "isEqualToBtn";
-            this.isEqualToBtn.Size = new System.Drawing.Size(93, 23);
+            this.isEqualToBtn.Size = new System.Drawing.Size(244, 50);
             this.isEqualToBtn.TabIndex = 8;
             this.isEqualToBtn.Text = "Is Equal To";
-            this.isEqualToBtn.UseVisualStyleBackColor = true;
+            this.isEqualToBtn.UseVisualStyleBackColor = false;
             this.isEqualToBtn.Click += new System.EventHandler(this.isEqualToBtn_Click);
             // 
             // isPartOfBtn
             // 
-            this.isPartOfBtn.Location = new System.Drawing.Point(1124, 213);
+            this.isPartOfBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(254)))), ((int)(((byte)(102)))));
+            this.isPartOfBtn.FlatAppearance.BorderSize = 0;
+            this.isPartOfBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.isPartOfBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.isPartOfBtn.Location = new System.Drawing.Point(1169, 280);
             this.isPartOfBtn.Name = "isPartOfBtn";
-            this.isPartOfBtn.Size = new System.Drawing.Size(75, 23);
+            this.isPartOfBtn.Size = new System.Drawing.Size(244, 50);
             this.isPartOfBtn.TabIndex = 8;
             this.isPartOfBtn.Text = "Is Part Of";
-            this.isPartOfBtn.UseVisualStyleBackColor = true;
+            this.isPartOfBtn.UseVisualStyleBackColor = false;
             this.isPartOfBtn.Click += new System.EventHandler(this.isPartOfBtn_Click);
             // 
             // includeBtn
             // 
-            this.includeBtn.Location = new System.Drawing.Point(1124, 242);
+            this.includeBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(255)))), ((int)(((byte)(102)))));
+            this.includeBtn.FlatAppearance.BorderSize = 0;
+            this.includeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.includeBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.includeBtn.Location = new System.Drawing.Point(1169, 330);
             this.includeBtn.Name = "includeBtn";
-            this.includeBtn.Size = new System.Drawing.Size(75, 23);
+            this.includeBtn.Size = new System.Drawing.Size(244, 50);
             this.includeBtn.TabIndex = 8;
             this.includeBtn.Text = "Includes";
-            this.includeBtn.UseVisualStyleBackColor = true;
+            this.includeBtn.UseVisualStyleBackColor = false;
             this.includeBtn.Click += new System.EventHandler(this.includeBtn_Click);
             // 
             // noRelationToBtn
             // 
-            this.noRelationToBtn.Location = new System.Drawing.Point(1025, 242);
+            this.noRelationToBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(178)))), ((int)(((byte)(102)))));
+            this.noRelationToBtn.Cursor = System.Windows.Forms.Cursors.Default;
+            this.noRelationToBtn.FlatAppearance.BorderSize = 0;
+            this.noRelationToBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noRelationToBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.noRelationToBtn.Location = new System.Drawing.Point(1169, 180);
             this.noRelationToBtn.Name = "noRelationToBtn";
-            this.noRelationToBtn.Size = new System.Drawing.Size(93, 23);
+            this.noRelationToBtn.Size = new System.Drawing.Size(244, 50);
             this.noRelationToBtn.TabIndex = 8;
             this.noRelationToBtn.Text = "No Relation To";
-            this.noRelationToBtn.UseVisualStyleBackColor = true;
+            this.noRelationToBtn.UseVisualStyleBackColor = false;
             this.noRelationToBtn.Click += new System.EventHandler(this.noRelationToBtn_Click);
             // 
             // currentElement
             // 
             this.currentElement.AutoSize = true;
-            this.currentElement.Location = new System.Drawing.Point(1029, 173);
+            this.currentElement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(119)))), ((int)(((byte)(141)))));
+            this.currentElement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.currentElement.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.currentElement.Location = new System.Drawing.Point(1229, 143);
             this.currentElement.Name = "currentElement";
-            this.currentElement.Size = new System.Drawing.Size(27, 15);
+            this.currentElement.Size = new System.Drawing.Size(44, 25);
             this.currentElement.TabIndex = 9;
             this.currentElement.Text = "----";
+            this.currentElement.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // exitBtn
+            // 
+            this.exitBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(119)))), ((int)(((byte)(141)))));
+            this.exitBtn.FlatAppearance.BorderSize = 0;
+            this.exitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.exitBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.exitBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(103)))), ((int)(((byte)(104)))));
+            this.exitBtn.Location = new System.Drawing.Point(1348, -1);
+            this.exitBtn.Name = "exitBtn";
+            this.exitBtn.Size = new System.Drawing.Size(51, 42);
+            this.exitBtn.TabIndex = 10;
+            this.exitBtn.Text = "X";
+            this.exitBtn.UseVisualStyleBackColor = false;
+            this.exitBtn.Click += new System.EventHandler(this.exitBtn_Click);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(119)))), ((int)(((byte)(141)))));
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(1169, -1);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(244, 852);
+            this.flowLayoutPanel1.TabIndex = 0;
             // 
             // Form2
             // 
-            this.ClientSize = new System.Drawing.Size(1211, 737);
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(34)))), ((int)(((byte)(59)))));
+            this.ClientSize = new System.Drawing.Size(1411, 848);
+            this.Controls.Add(this.exitBtn);
             this.Controls.Add(this.currentElement);
             this.Controls.Add(this.noRelationToBtn);
             this.Controls.Add(this.includeBtn);
@@ -171,7 +228,10 @@
             this.Controls.Add(this.newElementBtn);
             this.Controls.Add(this.noBtn);
             this.Controls.Add(this.yesBtn);
+            this.Controls.Add(this.flowLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -190,6 +250,8 @@
         private System.Windows.Forms.Button includeBtn;
         private System.Windows.Forms.Button noRelationToBtn;
         private System.Windows.Forms.Label currentElement;
+        private System.Windows.Forms.Button exitBtn;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
 
         #endregion
 

@@ -328,5 +328,10 @@ namespace graphhTester
             for (int i = 0; i < depthtracker.depthRows.Count; i++)
             { Debug.WriteLine(depthtracker.depthRows.Count); }
         }
+
+        private void exitBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

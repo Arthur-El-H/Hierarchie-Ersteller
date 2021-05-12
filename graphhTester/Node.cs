@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace graphhTester
 {
+    /*
     public class weightedNode
     {
         public Node node { get; set; }
@@ -17,6 +18,8 @@ namespace graphhTester
             weight = weightEntry;
         }
     }
+
+    */
     public class Node
     {
         public string name;

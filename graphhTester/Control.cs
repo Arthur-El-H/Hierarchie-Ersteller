@@ -240,7 +240,7 @@ namespace graphhTester
         }
         public void createEraser()
         {
-            eraser = new Pen(Color.FromArgb(240,240,240), 3);
+            eraser = new Pen(Color.FromArgb(23,34,59), 3);
         }
         void drawArrow(Point A, Point B, bool erase = false)
         {
@@ -283,7 +283,7 @@ namespace graphhTester
         #endregion
         public void changeMarkedRep(NodeRepresenter rep)
         {
-            if (markedRep != null) markedRep.BackColor = Color.Green;
+            if (markedRep != null) markedRep.BackColor = Color.FromArgb(255, 103, 104);
             markedRep = rep;
             rep.BackColor = Color.White;
             form1.setCurrentElement(rep.name);
