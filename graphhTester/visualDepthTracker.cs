@@ -36,7 +36,7 @@ namespace graphhTester
             int index_ = visualTree[rep.depth].FindIndex(a => a == rep);
             for (int i = 0; i < index_; i++)
             {
-                if (visualTree[rep.depth][i].movedAlready)
+                //if (visualTree[rep.depth][i].movedAlready)
                 {
                     foreach (NodeRepresenter child in visualTree[rep.depth][i].children)
                     {
@@ -54,11 +54,13 @@ namespace graphhTester
 
         List<Node> toNotCheck = new List<Node>();
         NodeRepresenter repsibling = new NodeRepresenter();//10.5.
+        NodeRepresenter new_Child = new NodeRepresenter();//10.5.
         int testindex; //10.5.
 
         public void insertRepAsParent(NodeRepresenter rep, NodeRepresenter newChild, bool notFirstTime = true)
         {
             rep.children.Add(newChild);
+            new_Child = newChild;
 
             if (!notFirstTime)
             {
@@ -67,16 +69,15 @@ namespace graphhTester
                 rep.movedAlready = false;
 
                 int repIndex = getRepIndex(newChild);
-                if ((repIndex + 1) < visualTree[newChild.depth].Count)
+                for (int i = repIndex; i < visualTree[newChild.depth].Count; i++)
                 {
-                    repsibling = visualTree[newChild.depth][repIndex + 1];//10.5.
-                    //repsibling.lastChildIndex--;
-                    Debug.WriteLine(repsibling.name + " got it.");
+                    visualTree[newChild.depth][i].lastChildIndex -= newChild.children.Count;
                 }
-                //rep.depth = 0;
+                for (int i = getRepIndex(rep.parent); i < visualTree[rep.parent.depth].Count; i++)
+                {
+                    visualTree[rep.parent.depth][i].lastChildIndex --;
+                }
                 insertRep(rep, true, repIndex);
-                repsibling.lastChildIndex -= newChild.children.Count;
-                //testindex = visualTree[rep.parent.depth].FindIndex(a => a == rep.parent);//10.5.
             }
             Debug.WriteLine("Station 2: " + repsibling.lastChildIndex + " für " + repsibling.name);//10.5.
 
@@ -114,16 +115,18 @@ namespace graphhTester
                 for (int i = index; i < visualTree[noderep.parent.depth].Count; i++)
                 {
                 //10.5. if (visualTree[noderep.parent.depth][i].movedAlready)
-                    for (int j = 0; j < noderep.children.Count; j++)
+                    if (!(toNotCheck.Contains(visualTree[noderep.parent.depth][i].node) || visualTree[noderep.parent.depth][i] == new_Child))
                     {
+                        for (int j = 0; j < noderep.children.Count; j++)
+                        {
                         if (visualTree[noderep.parent.depth][i].lastChildIndex > 0)
                         {
                             Debug.WriteLine(noderep.parent.name + " gets minus");
                             visualTree[noderep.parent.depth][i].lastChildIndex--;
                         }
+                        }                    
                     }
                 }
-
             replaceDepth(noderep.depth);
         }
         public void insertRep(NodeRepresenter repC, bool specificIndex = false, int index = 0)
