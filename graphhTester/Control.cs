@@ -17,8 +17,8 @@ namespace graphhTester
         Pen pen;
         Pen eraser;
 
-        public int verticalDistance = 40;
-        public int horizontalDistance = 100;
+        public int verticalDistance = 80;
+        public int horizontalDistance = 200;
 
         List<Point> listOfLines = new List<Point>();
         List<Node> toTest;
@@ -31,11 +31,12 @@ namespace graphhTester
         int depthCounter = 1;
         int testCounter;
         public bool levelFound;
-        Point masterLoc = new Point(400, 12);
+        Point masterLoc = new Point(650, 125);
         public void createMasterRep(Node rep)
         {
             NodeRepresenter nodeRepMaster = new NodeRepresenter();
             masterNode.nodeRep = nodeRepMaster;
+            masterNode.nodeRep.BackColor = Color.FromArgb(255, 103, 104);
             nodeRepMaster.node = masterNode;
             nodeRepMaster.name = masterNode.name;
             nodeRepMaster.Text = masterNode.name;
@@ -44,7 +45,8 @@ namespace graphhTester
             nodeRepMaster.BringToFront();
             nodeRepMaster.Visible = true;
             nodeRepMaster.Location = masterLoc;
-            nodeRepMaster.Bottom = new Point(420, 24);
+            nodeRepMaster.Bottom = new Point(670, 137);
+            nodeRepMaster.Size = new Size(horizontalDistance / 2, verticalDistance / 2);
             form1.receiveRep(nodeRepMaster);
             visDepthTracker.insertNodeRepMaster(nodeRepMaster);
         }
@@ -234,7 +236,7 @@ namespace graphhTester
         #region
         public void createPen()
         {
-            pen = new Pen(Color.Black, 3);
+            pen = new Pen(Color.FromArgb(198, 196,221), 3);
             g = form1.CreateGraphics();
             createEraser();
         }
@@ -283,7 +285,7 @@ namespace graphhTester
         #endregion
         public void changeMarkedRep(NodeRepresenter rep)
         {
-            if (markedRep != null) markedRep.BackColor = Color.FromArgb(255, 103, 104);
+            if (markedRep != null) markedRep.BackColor = Color.FromArgb(198, 196, 221);
             markedRep = rep;
             rep.BackColor = Color.White;
             form1.setCurrentElement(rep.name);

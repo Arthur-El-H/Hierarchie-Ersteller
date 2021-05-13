@@ -54,7 +54,7 @@ namespace graphhTester
         void createmasterNode()
 
         {
-            masterNode = new Node("master", depthtracker);
+            masterNode = new Node("Root", depthtracker);
             masterNode.form1 = this;
             depthtracker.addNewRow();
             depthtracker.addToRow(0,masterNode);

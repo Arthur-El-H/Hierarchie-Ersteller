@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.yesBtn = new System.Windows.Forms.Button();
             this.noBtn = new System.Windows.Forms.Button();
             this.newElementBtn = new System.Windows.Forms.Button();
@@ -42,26 +43,38 @@
             this.currentElement = new System.Windows.Forms.Label();
             this.exitBtn = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.flowLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // yesBtn
             // 
-            this.yesBtn.Location = new System.Drawing.Point(419, 334);
+            this.yesBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(196)))), ((int)(((byte)(221)))));
+            this.yesBtn.FlatAppearance.BorderSize = 0;
+            this.yesBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.yesBtn.Location = new System.Drawing.Point(820, 50);
             this.yesBtn.Name = "yesBtn";
-            this.yesBtn.Size = new System.Drawing.Size(75, 23);
+            this.yesBtn.Size = new System.Drawing.Size(244, 50);
             this.yesBtn.TabIndex = 0;
             this.yesBtn.Text = "Yes";
-            this.yesBtn.UseVisualStyleBackColor = true;
+            this.yesBtn.UseVisualStyleBackColor = false;
             this.yesBtn.Click += new System.EventHandler(this.yesBtn_Click);
             // 
             // noBtn
             // 
-            this.noBtn.Location = new System.Drawing.Point(529, 334);
+            this.noBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(196)))), ((int)(((byte)(221)))));
+            this.noBtn.FlatAppearance.BorderSize = 0;
+            this.noBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.noBtn.Location = new System.Drawing.Point(820, 0);
+            this.noBtn.Margin = new System.Windows.Forms.Padding(0);
             this.noBtn.Name = "noBtn";
-            this.noBtn.Size = new System.Drawing.Size(75, 23);
+            this.noBtn.Size = new System.Drawing.Size(244, 50);
             this.noBtn.TabIndex = 1;
             this.noBtn.Text = "No";
-            this.noBtn.UseVisualStyleBackColor = true;
+            this.noBtn.UseVisualStyleBackColor = false;
             this.noBtn.Click += new System.EventHandler(this.noBtn_Click);
             // 
             // newElementBtn
@@ -80,16 +93,17 @@
             // 
             // elementInput
             // 
-            this.elementInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(119)))), ((int)(((byte)(141)))));
+            this.elementInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(171)))), ((int)(((byte)(191)))), ((int)(((byte)(226)))));
             this.elementInput.Location = new System.Drawing.Point(1169, 56);
             this.elementInput.Name = "elementInput";
             this.elementInput.Size = new System.Drawing.Size(244, 23);
             this.elementInput.TabIndex = 3;
+            this.elementInput.Text = "Write Element here";
             // 
             // newNodeqst
             // 
             this.newNodeqst.AutoSize = true;
-            this.newNodeqst.Location = new System.Drawing.Point(462, 298);
+            this.newNodeqst.Location = new System.Drawing.Point(435, 12);
             this.newNodeqst.Name = "newNodeqst";
             this.newNodeqst.Size = new System.Drawing.Size(32, 15);
             this.newNodeqst.TabIndex = 4;
@@ -99,7 +113,7 @@
             // 
             this.testBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(56)))), ((int)(((byte)(89)))));
             this.testBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.testBtn.Location = new System.Drawing.Point(897, 341);
+            this.testBtn.Location = new System.Drawing.Point(1088, 784);
             this.testBtn.Name = "testBtn";
             this.testBtn.Size = new System.Drawing.Size(75, 23);
             this.testBtn.TabIndex = 5;
@@ -109,7 +123,7 @@
             // 
             // listShowCase
             // 
-            this.listShowCase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(119)))), ((int)(((byte)(141)))));
+            this.listShowCase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(196)))), ((int)(((byte)(221)))));
             this.listShowCase.HideSelection = false;
             this.listShowCase.Location = new System.Drawing.Point(1169, 380);
             this.listShowCase.Name = "listShowCase";
@@ -177,10 +191,11 @@
             // currentElement
             // 
             this.currentElement.AutoSize = true;
-            this.currentElement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(119)))), ((int)(((byte)(141)))));
+            this.currentElement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(196)))), ((int)(((byte)(221)))));
             this.currentElement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.currentElement.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.currentElement.Location = new System.Drawing.Point(1229, 143);
+            this.currentElement.Location = new System.Drawing.Point(3, 130);
+            this.currentElement.Margin = new System.Windows.Forms.Padding(3, 130, 3, 0);
             this.currentElement.Name = "currentElement";
             this.currentElement.Size = new System.Drawing.Size(44, 25);
             this.currentElement.TabIndex = 9;
@@ -189,7 +204,7 @@
             // 
             // exitBtn
             // 
-            this.exitBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(119)))), ((int)(((byte)(141)))));
+            this.exitBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(196)))), ((int)(((byte)(221)))));
             this.exitBtn.FlatAppearance.BorderSize = 0;
             this.exitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exitBtn.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -204,19 +219,39 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(107)))), ((int)(((byte)(119)))), ((int)(((byte)(141)))));
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(198)))), ((int)(((byte)(196)))), ((int)(((byte)(221)))));
+            this.flowLayoutPanel1.Controls.Add(this.currentElement);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(1169, -1);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 30, 3, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(244, 852);
             this.flowLayoutPanel1.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(228, 848);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.Controls.Add(this.pictureBox1);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(228, 848);
+            this.flowLayoutPanel3.TabIndex = 0;
             // 
             // Form2
             // 
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(34)))), ((int)(((byte)(59)))));
             this.ClientSize = new System.Drawing.Size(1411, 848);
+            this.Controls.Add(this.flowLayoutPanel3);
             this.Controls.Add(this.exitBtn);
-            this.Controls.Add(this.currentElement);
             this.Controls.Add(this.noRelationToBtn);
             this.Controls.Add(this.includeBtn);
             this.Controls.Add(this.isPartOfBtn);
@@ -233,6 +268,10 @@
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Form2_Load);
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.flowLayoutPanel3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -252,6 +291,8 @@
         private System.Windows.Forms.Label currentElement;
         private System.Windows.Forms.Button exitBtn;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
 
         #endregion
 

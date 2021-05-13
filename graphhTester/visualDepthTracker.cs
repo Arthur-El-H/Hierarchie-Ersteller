@@ -13,8 +13,8 @@ namespace graphhTester
         List <int> amountOfRows = new List<int>();
         List<Point> pointForDepth = new List<Point>(); //holds (0/0) for every depth
 
-        int verticalDistance = 40;
-        int horizontalDistance = 100;
+        int verticalDistance = 80;
+        int horizontalDistance = 150;
         int elementsInRow = 10;
 
         public NodeRepresenter masterRep;
@@ -62,23 +62,22 @@ namespace graphhTester
             rep.children.Add(newChild);
             new_Child = newChild;
 
-            if (!notFirstTime)
-            {
-                toNotCheck = newChild.node.includes(new List<Node>());
-                foreach(Node node in toNotCheck) { node.nodeRep.movedAlready = false; }
-                rep.movedAlready = false;
+            
+            toNotCheck = newChild.node.includes(new List<Node>());
+            foreach(Node node in toNotCheck) { node.nodeRep.movedAlready = false; }
+            rep.movedAlready = false;
 
-                int repIndex = getRepIndex(newChild);
-                for (int i = repIndex; i < visualTree[newChild.depth].Count; i++)
-                {
-                    visualTree[newChild.depth][i].lastChildIndex -= newChild.children.Count;
-                }
-                for (int i = getRepIndex(rep.parent); i < visualTree[rep.parent.depth].Count; i++)
-                {
-                    visualTree[rep.parent.depth][i].lastChildIndex --;
-                }
-                insertRep(rep, true, repIndex);
+            int repIndex = getRepIndex(newChild);
+            for (int i = repIndex; i < visualTree[newChild.depth].Count; i++)
+            {
+                visualTree[newChild.depth][i].lastChildIndex -= newChild.children.Count;
             }
+            for (int i = getRepIndex(rep.parent); i < visualTree[rep.parent.depth].Count; i++)
+            {
+                visualTree[rep.parent.depth][i].lastChildIndex --;
+            }
+            if (!notFirstTime) { insertRep(rep, true, repIndex); }
+            
             Debug.WriteLine("Station 2: " + repsibling.lastChildIndex + " für " + repsibling.name);//10.5.
 
             newChild.movedAlready = false;
@@ -142,9 +141,9 @@ namespace graphhTester
         {
             visualTree.Add(new List<NodeRepresenter>());
             amountOfRows.Add(1);
-            int pointY = 30;
+            int pointY = 60;
             foreach(int row in amountOfRows) { pointY = pointY + row * verticalDistance; }
-            pointForDepth.Add(new Point(12, pointY));
+            pointForDepth.Add(new Point(300, pointY));
         }
         public int test1 =0;
         public int test2 =0;
@@ -201,8 +200,8 @@ namespace graphhTester
                 visualTree[depth][i].Location = newLoc;
 
                 //set anchorpoints
-                visualTree[depth][i].Bottom = new Point(newLoc.X + 15, newLoc.Y + 7);
-                visualTree[depth][i].Top = new Point(newLoc.X    + 15, newLoc.Y);
+                visualTree[depth][i].Bottom = new Point(newLoc.X + 30, newLoc.Y + 14);
+                visualTree[depth][i].Top = new Point(newLoc.X    + 30, newLoc.Y);
             }
         }
         private void giveNewRowTo(int depth)

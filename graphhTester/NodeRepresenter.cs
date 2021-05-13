@@ -16,12 +16,11 @@ namespace graphhTester
         public NodeRepresenter parent;
         public Control control;
         public bool movedAlready;
-        Color noderepColor = Color.FromArgb(255, 255, 103, 104);
-
+        Color noderepColor = Color.FromArgb(255, 198, 196, 221);
         public Point Bottom;
         public Point Top;
 
-        public Node node; //Übergangslösung! Eigentlich hashmap in Control
+        public Node node; 
 
         public int lastChildIndex = 0;
         public int depth;
@@ -33,11 +32,12 @@ namespace graphhTester
         }
         protected override void OnClick(EventArgs e)
         {
-            control.changeMarkedRep (this);
             Debug.WriteLine(node.name + " ist mein node");
             Debug.WriteLine(node.depth.ToString() + " ist depth meines nodes");
             Debug.WriteLine(depth.ToString() + " ist meine depth");
             Debug.WriteLine(lastChildIndex.ToString() + " ist mein lastChildIndex");
+            if (this == control.masterNode.nodeRep) { return; }
+            control.changeMarkedRep(this);
         }
     }
 }
