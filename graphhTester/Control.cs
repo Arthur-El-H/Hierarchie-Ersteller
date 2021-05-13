@@ -31,7 +31,7 @@ namespace graphhTester
         int depthCounter = 1;
         int testCounter;
         public bool levelFound;
-        Point masterLoc = new Point(650, 125);
+        Point masterLoc = new Point(300, 20);
         public void createMasterRep(Node rep)
         {
             NodeRepresenter nodeRepMaster = new NodeRepresenter();
@@ -45,7 +45,8 @@ namespace graphhTester
             nodeRepMaster.BringToFront();
             nodeRepMaster.Visible = true;
             nodeRepMaster.Location = masterLoc;
-            nodeRepMaster.Bottom = new Point(670, 137);
+            nodeRepMaster.Font = new Font("Segeo UI", 12);
+            nodeRepMaster.Bottom = new Point(320, 32);
             nodeRepMaster.Size = new Size(horizontalDistance / 2, verticalDistance / 2);
             form1.receiveRep(nodeRepMaster);
             visDepthTracker.insertNodeRepMaster(nodeRepMaster);
@@ -191,6 +192,7 @@ namespace graphhTester
             form1.enableAddElement(true);
             form1.setButtonState(1);
             form1.clearNewNodeqst();
+
             deleteAllArrows();
             redrawAllArrows();
         }
@@ -212,13 +214,14 @@ namespace graphhTester
             noderep.parent.children.Add(noderep);
             noderep.BringToFront();
             noderep.Visible = true;
+            noderep.Font = new Font("Segeo UI", 12);
             noderep.depth = rep.depth;
             noderep.Size = new Size(horizontalDistance/2, verticalDistance/2);
             form1.receiveRep(noderep);
             if(!asParent) visDepthTracker.insertRep(noderep);
         }
 
-        void representNode(Node represent, Point point)
+        /*void representNode(Node represent, Point point)
         {
             NodeRepresenter rep = new NodeRepresenter();
             rep.name = represent.name;
@@ -228,7 +231,7 @@ namespace graphhTester
             rep.BringToFront();
             rep.Visible = true;
             form1.receiveRep(rep);
-        }
+        }*/
 
         #endregion
 
@@ -237,7 +240,7 @@ namespace graphhTester
         public void createPen()
         {
             pen = new Pen(Color.FromArgb(198, 196,221), 3);
-            g = form1.CreateGraphics();
+            g = form1.getHierarchyPanel().CreateGraphics();
             createEraser();
         }
         public void createEraser()

@@ -40,13 +40,22 @@ namespace graphhTester
             noBtn.Hide();
             yesBtn.Hide();
             newNodeqst.Hide();
+
+            listShowCase.View = View.List;
+            listShowCase.LabelWrap = true;           
+            //listShowCase.FullRowSelect = true;
         }
 
-
+        public Panel getHierarchyPanel()
+        {
+            return hierarchyPanel;
+        }
 
         public void receiveRep(Label nodeRep)
         {
-            this.Controls.Add(nodeRep);
+            //this.Controls.Add(nodeRep);
+            hierarchyPanel.Controls.Add(nodeRep);
+            
         }
 
         public Node masterNode;
@@ -87,6 +96,8 @@ namespace graphhTester
 
         public void poseQuestion(Node child, Node parent)
         {
+            newNodeqst.Visible = true;
+            newNodeQstPanel.Visible = true;
             newNodeqst.Text = "Is " + child.name + " a " + parent.name;
             yesBtn.Enabled = true;
             noBtn.Enabled = true;
@@ -95,6 +106,8 @@ namespace graphhTester
         public void clearNewNodeqst()
         {
             newNodeqst.Text = "";
+            newNodeqst.Visible = false;
+            newNodeQstPanel.Visible = false;
         }
 
         private void yesBtn_Click(object sender, EventArgs e)

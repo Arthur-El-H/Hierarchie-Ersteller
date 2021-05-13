@@ -141,9 +141,11 @@ namespace graphhTester
         {
             visualTree.Add(new List<NodeRepresenter>());
             amountOfRows.Add(1);
-            int pointY = 60;
-            foreach(int row in amountOfRows) { pointY = pointY + row * verticalDistance; }
-            pointForDepth.Add(new Point(300, pointY));
+            int pointY = 40;
+            Debug.WriteLine(amountOfRows.Count);
+            for (int i = 1; i < amountOfRows.Count; i++) { pointY = pointY + verticalDistance; }
+            Debug.WriteLine(pointY + "is too big?");
+            pointForDepth.Add(new Point(30, pointY));
         }
         public int test1 =0;
         public int test2 =0;
@@ -195,8 +197,8 @@ namespace graphhTester
         {
             for (int i = 0; i < visualTree[depth].Count; i++)
             {
-                Point newLoc = new Point(i % elementsInRow * horizontalDistance + pointForDepth[depth].X,
-                                         i / elementsInRow * verticalDistance + pointForDepth[depth].Y);
+                Point newLoc = new Point(i * horizontalDistance + pointForDepth[depth].X,
+                                         pointForDepth[depth].Y);
                 visualTree[depth][i].Location = newLoc;
 
                 //set anchorpoints

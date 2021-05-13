@@ -61,7 +61,7 @@
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAANAAAANQCAYAAABZ/OExAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAP
-        XwAAD18B14rayQAAU2dJREFUeF7tvdl3FFfWt8l/0H37XfTFe9Grv169+ntrrV5VZVfZxhM2nm3s8gDY
+        XgAAD14BBc04LQAAU2dJREFUeF7tvdl3FFfWt8l/0H37XfTFe9Grv169+ntrrV5VZVfZxhM2nm3s8gDY
         Bhs8QAE2o0DMGBszmckMZkYTSEhCSqUypZw0MyNmhMCuwS5XlV3lmmyXyzbsjn0yQiRiK5WKyMg8Efm7
         eJakjMhUnsz9xD5nnxMRww53fEwAAHtAIAAcAIEAcAAEAsABEAgAB0AgABwAgQBwAAQCwAEQCAAHQCAA
         HACBAHAABALAARAIAAdAIAAcAIEAcAAEAsABEAgAB0AgABwAgQBwAAQCwAEQCAAHQCAAHACBAHAABALA
@@ -420,7 +420,4 @@
         gT6m/x/lkhF0PZ6rVAAAAABJRU5ErkJggg==
 </value>
   </data>
-  <metadata name="$this.Locked" type="System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
-    <value>True</value>
-  </metadata>
 </root>
