@@ -46,7 +46,7 @@ namespace graphhTester
             nodeRepMaster.Visible = true;
             nodeRepMaster.Location = masterLoc;
             nodeRepMaster.Font = new Font("Segeo UI", 12);
-            nodeRepMaster.Bottom = new Point(320, 32);
+            nodeRepMaster.Bottom = new Point(350, 60);
             nodeRepMaster.Size = new Size(horizontalDistance / 2, verticalDistance / 2);
             form1.receiveRep(nodeRepMaster);
             visDepthTracker.insertNodeRepMaster(nodeRepMaster);
@@ -157,7 +157,7 @@ namespace graphhTester
             testedParent.children.Remove(tested);
             tested.parent = newElement;
             setBelow(tested);
-            foreach (Node node in tested.includes(new List<Node>()))
+            foreach (Node node in tested.includes())
             {
                 setBelow(node);
             }
@@ -275,7 +275,7 @@ namespace graphhTester
                 drawArrow(childNode.nodeRep.Top, masterNode.nodeRep.Bottom);
             }
 
-            foreach (Node node in masterNode.includes(new List<Node>() ))
+            foreach (Node node in masterNode.includes())
             {
 
                 foreach (Node childNode in node.children)
@@ -288,7 +288,7 @@ namespace graphhTester
         #endregion
         public void changeMarkedRep(NodeRepresenter rep)
         {
-            if (markedRep != null) markedRep.BackColor = Color.FromArgb(198, 196, 221);
+            if (markedRep != null) markedRep.BackColor = markedRep.node.currentColor;
             markedRep = rep;
             rep.BackColor = Color.White;
             form1.setCurrentElement(rep.name);

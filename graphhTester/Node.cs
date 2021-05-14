@@ -29,7 +29,6 @@ namespace graphhTester
 
         public List<Node> included = new List<Node>();
 
-        int childrensDepth;
         public int depth = 0;
         public int amountOfIncluded;
 
@@ -37,6 +36,7 @@ namespace graphhTester
         public Form2 form1;
 
         public NodeRepresenter nodeRep;
+        public System.Drawing.Color currentColor = System.Drawing.Color.FromArgb(198, 196, 221);
 
         public Node(string nameEntry, Depthtracker depthtracker_)
         {
@@ -45,27 +45,29 @@ namespace graphhTester
             children = new List<Node>();
         }
         //int parentDegreeCounter;
-        public List<Node> isPartOf(List<Node> outputNodes)
+        public List<Node> isPartOf()
         {
-            outputNodes.Add(parent);
+            List<Node> output = new List<Node>();
+            output.Add(parent);
             if (parent.parent != null)
             {
-                return parent.isPartOf(outputNodes); 
+                output.AddRange(parent.isPartOf()); 
             }
             else
             {
-                //parentDegreeCounter = 0;
-                return (outputNodes);
+                //output.AddRange(output);
             }
+            return output;
         }
         //potentiell zu Array, wenn childrensChildren getrackt würde (z.B. durch int bei jedem node und eins hochzählen bei parentParents nach Aufnahme neues Nodes
-       public List<Node> includes(List<Node> output)
+       public List<Node> includes()
         {
-                foreach (Node child in children)
-                {
-                    output.Add(child);
-                    if (child.children.Count > 0) { output.AddRange(child.includes(new List<Node>() )); }
-                }
+            List<Node> output = new List<Node>();
+            foreach (Node child in children)
+            {
+                output.Add(child);
+                if (child.children.Count > 0) { output.AddRange(child.includes()); }
+            }
             return output;
         }
         Node getParent(int degree)
@@ -77,22 +79,23 @@ namespace graphhTester
             }
             return output;
         }        
-        public List<Node> isEqualTo(List<Node> outputNode)                        // Gibt sich selbst mit wert 0 zurück: Gut für markieren.
+        public List<Node> isEqualTo()                        // Gibt sich selbst mit wert 0 zurück: Gut für markieren.
         {
-            outputNode = depthtracker.getDepthList(this.depth);
-            if (outputNode.Contains(depthtracker.getDepthList(1)[0])) { outputNode.Remove(depthtracker.getDepthList(1)[0]); }
+            List<Node> outputNode = new List<Node> (depthtracker.getDepthList(this.depth));
+            if (outputNode.Contains(depthtracker.getDepthList(1)[0])){ outputNode.Remove(depthtracker.getDepthList(1)[0]); }
             outputNode.Remove(this);
             return outputNode;
         }
-        public List<Node> hasNoRelationTo(List<Node> output)
-        {            
+        public List<Node> hasNoRelationTo()
+        {
+            List<Node> output = new List<Node>();
             Node varNode = this.getParent(depth - 1);
-            List<Node> parentsEquals = new List<Node>(varNode.isEqualTo(new List<Node>() ));
-            parentsEquals.Remove(this);
+            List<Node> parentsEquals = new List<Node>(varNode.isEqualTo());
+            output.AddRange(parentsEquals);
             for (int i = 0; i < parentsEquals.Count; i++)
             {
                 varNode = parentsEquals[i];
-                output.AddRange(varNode.includes( new List<Node>() ));
+                output.AddRange(varNode.includes());
                 output.Add(varNode);
             }
             return output;            

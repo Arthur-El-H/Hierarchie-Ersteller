@@ -104,12 +104,13 @@
             // elementInput
             // 
             this.elementInput.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(171)))), ((int)(((byte)(191)))), ((int)(((byte)(226)))));
-            this.elementInput.Location = new System.Drawing.Point(0, 77);
+            this.elementInput.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.elementInput.Location = new System.Drawing.Point(0, 71);
             this.elementInput.Margin = new System.Windows.Forms.Padding(0);
             this.elementInput.Name = "elementInput";
-            this.elementInput.Size = new System.Drawing.Size(244, 23);
+            this.elementInput.Size = new System.Drawing.Size(244, 29);
             this.elementInput.TabIndex = 3;
-            this.elementInput.Text = "Write Element here";
+            this.elementInput.Text = "Whats the new Elements Name?";
             // 
             // newNodeqst
             // 
@@ -276,7 +277,7 @@
             this.hierarchyPanel.Controls.Add(this.testBtn);
             this.hierarchyPanel.Location = new System.Drawing.Point(234, 112);
             this.hierarchyPanel.Name = "hierarchyPanel";
-            this.hierarchyPanel.Size = new System.Drawing.Size(929, 724);
+            this.hierarchyPanel.Size = new System.Drawing.Size(929, 736);
             this.hierarchyPanel.TabIndex = 12;
             // 
             // panel1
@@ -310,6 +311,7 @@
             this.insertAsChildBtn.TabIndex = 6;
             this.insertAsChildBtn.Text = "Insert as Child of";
             this.insertAsChildBtn.UseVisualStyleBackColor = false;
+            this.insertAsChildBtn.Click += new System.EventHandler(this.insertAsChildBtn_Click);
             // 
             // Form2
             // 

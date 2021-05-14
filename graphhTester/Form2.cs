@@ -15,8 +15,6 @@ namespace graphhTester
         public Depthtracker depthtracker;
         public visualDepthTracker visDepthTracker;
         Control control;
-
-
         public Form2()
         {
             InitializeComponent();
@@ -45,19 +43,16 @@ namespace graphhTester
             listShowCase.LabelWrap = true;           
             //listShowCase.FullRowSelect = true;
         }
-
         public Panel getHierarchyPanel()
         {
             return hierarchyPanel;
         }
-
         public void receiveRep(Label nodeRep)
         {
             //this.Controls.Add(nodeRep);
             hierarchyPanel.Controls.Add(nodeRep);
             
         }
-
         public Node masterNode;
         public Node varNode;
         void createmasterNode()
@@ -68,7 +63,6 @@ namespace graphhTester
             depthtracker.addNewRow();
             depthtracker.addToRow(0,masterNode);
         }
-
         public void enableButtons(bool enable)
         {
             if (enable) { yesBtn.Show(); noBtn.Show(); newNodeqst.Show(); }
@@ -77,23 +71,19 @@ namespace graphhTester
             yesBtn.Enabled = enable;
             noBtn.Enabled = enable;
         }
-
         public void enableAddElement(bool enable)
         {
             newElementBtn.Enabled = enable;
         }
-
         int buttonState;
         public void setButtonState(int state)
         {
             buttonState = state;
-        }
-
+        }        
         private void newElementBtn_Click(object sender, EventArgs e)
         {
             control.startTesting(elementInput.Text, masterNode);
         }
-
         public void poseQuestion(Node child, Node parent)
         {
             newNodeqst.Visible = true;
@@ -102,14 +92,12 @@ namespace graphhTester
             yesBtn.Enabled = true;
             noBtn.Enabled = true;
         }
-
         public void clearNewNodeqst()
         {
             newNodeqst.Text = "";
             newNodeqst.Visible = false;
             newNodeQstPanel.Visible = false;
         }
-
         private void yesBtn_Click(object sender, EventArgs e)
         {
             switch (buttonState)
@@ -123,7 +111,6 @@ namespace graphhTester
                     else { control.startInsertingAsParent(); } break;
             }
         }
-
         private void noBtn_Click(object sender, EventArgs e)
         {
             switch (buttonState)
@@ -132,7 +119,6 @@ namespace graphhTester
                 case 2: enableButtons(false); if (control.levelFound) { control.testNext(2); } else control.testNext(1); break;
             }
         }
-
         private void testBtn_Click(object sender, EventArgs e)
         {
             control.startTesting("granddaddy", masterNode);
@@ -219,7 +205,7 @@ namespace graphhTester
             noBtn_Click(sender, e);
             noBtn_Click(sender, e);
 
-            control.startTesting("Softshelljacke dotSource blau M", masterNode);
+            control.startTesting("Softshelljacke blau M", masterNode);
             yesBtn_Click(sender, e);
             yesBtn_Click(sender, e);
             noBtn_Click(sender, e);
@@ -239,14 +225,14 @@ namespace graphhTester
             noBtn_Click(sender, e);
             yesBtn_Click(sender, e);
 
-            control.startTesting("Polo dotSource", masterNode);
+            control.startTesting("Poloshirt", masterNode);
             yesBtn_Click(sender, e);
             yesBtn_Click(sender, e);
             yesBtn_Click(sender, e);
             noBtn_Click(sender, e);
             yesBtn_Click(sender, e);
 
-            control.startTesting("Polo dotSource grün L", masterNode);
+            control.startTesting("Poloshirt grün L", masterNode);
             yesBtn_Click(sender, e);
             yesBtn_Click(sender, e);
             yesBtn_Click(sender, e);
@@ -254,7 +240,7 @@ namespace graphhTester
             yesBtn_Click(sender, e);
 
             
-            control.startTesting("Softshelljacke dotSource blau", masterNode);
+            control.startTesting("Softshelljacke blau", masterNode);
             yesBtn_Click(sender, e);
             yesBtn_Click(sender, e);
             noBtn_Click(sender, e);
@@ -303,32 +289,42 @@ namespace graphhTester
 
         }
 
+        Color equal      = Color.FromArgb(255, 216, 102);
+        Color include    = Color.FromArgb(217, 255, 102);
+        Color isPartOf   = Color.FromArgb(255, 254, 102);
+        Color noRelation = Color.FromArgb(255, 178, 102);
         private void includeBtn_Click(object sender, EventArgs e)
         {
             listShowCase.Items.Clear();
-            control.showList(control.markedRep.node.includes(new List<Node>()));
+            List<Node> nodes = new List<Node>();
+            nodes = control.markedRep.node.includes();
+            visDepthTracker.markList(nodes, include);
+            control.showList(nodes);
         }
 
         private void isPartOfBtn_Click(object sender, EventArgs e)
         {
             listShowCase.Items.Clear();
-            control.showList(control.markedRep.node.isPartOf(new List<Node>()));
+            List<Node> nodes = control.markedRep.node.isPartOf();
+            visDepthTracker.markList(nodes, isPartOf);
+            control.showList(nodes);
         }
 
         private void isEqualToBtn_Click(object sender, EventArgs e)
         {
             listShowCase.Items.Clear();
             List<Node> nodes = new List<Node>();
-            List<Node> Nodes = control.markedRep.node.isEqualTo(new List<Node>());
-            foreach (Node node in Nodes)
-            {
-                AddToShowcase(node.name);
-            }
+            nodes = control.markedRep.node.isEqualTo();
+            visDepthTracker.markList(nodes, equal);
+            control.showList(nodes);
         }
         private void noRelationToBtn_Click(object sender, EventArgs e)
         {
             listShowCase.Items.Clear();
-            control.showList(control.markedRep.node.hasNoRelationTo(new List<Node>()));
+            List<Node> nodes = new List<Node>();
+            nodes = control.markedRep.node.hasNoRelationTo();
+            visDepthTracker.markList(nodes, noRelation);
+            control.showList(nodes);
         }
 
         public void setCurrentElement (string name)
@@ -345,6 +341,11 @@ namespace graphhTester
         private void exitBtn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void insertAsChildBtn_Click(object sender, EventArgs e)
+        {
+            control.startTesting(elementInput.Text, control.markedRep.node);
         }
     }
 }

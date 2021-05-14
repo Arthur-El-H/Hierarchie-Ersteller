@@ -15,7 +15,6 @@ namespace graphhTester
 
         int verticalDistance = 80;
         int horizontalDistance = 150;
-        int elementsInRow = 10;
 
         public NodeRepresenter masterRep;
         public Control control;
@@ -63,7 +62,7 @@ namespace graphhTester
             new_Child = newChild;
 
             
-            toNotCheck = newChild.node.includes(new List<Node>());
+            toNotCheck = newChild.node.includes();
             foreach(Node node in toNotCheck) { node.nodeRep.movedAlready = false; }
             rep.movedAlready = false;
 
@@ -202,8 +201,8 @@ namespace graphhTester
                 visualTree[depth][i].Location = newLoc;
 
                 //set anchorpoints
-                visualTree[depth][i].Bottom = new Point(newLoc.X + 30, newLoc.Y + 14);
-                visualTree[depth][i].Top = new Point(newLoc.X    + 30, newLoc.Y);
+                visualTree[depth][i].Bottom = new Point(newLoc.X + 50, newLoc.Y + 40);
+                visualTree[depth][i].Top =    new Point(newLoc.X + 50, newLoc.Y);
             }
         }
         private void giveNewRowTo(int depth)
@@ -213,6 +212,23 @@ namespace graphhTester
             {
                 pointForDepth[i] = new Point(pointForDepth[i].X, pointForDepth[i].Y + verticalDistance);
                 replaceDepth(i);
+            }
+        }
+
+        List <Node> markedNodes = new List<Node>();
+        Color standartColor = Color.FromArgb(198, 196, 221);
+        public void markList(List<Node> nodes, Color color)
+        {
+            colornodesList(markedNodes, standartColor);
+            markedNodes = nodes;
+            colornodesList(nodes, color);
+        }
+        public void colornodesList(List<Node> nodes, Color color)
+        {
+            foreach(Node node in nodes)
+            {
+                node.nodeRep.BackColor = color;
+                node.currentColor = color;
             }
         }
     }
