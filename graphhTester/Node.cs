@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.Windows.Forms;
+﻿using System.Collections.Generic;
 
 namespace graphhTester
 {
@@ -23,20 +19,14 @@ namespace graphhTester
     public class Node
     {
         public string name;
-
+        public NodeRepresenter nodeRep;
         public Node parent;
         public List<Node> children = new List<Node>();
-
-        public List<Node> included = new List<Node>();
-
+        public System.Drawing.Color currentColor = System.Drawing.Color.FromArgb(198, 196, 221);
         public int depth = 0;
-        public int amountOfIncluded;
 
         public Depthtracker depthtracker;
         public Form2 form1;
-
-        public NodeRepresenter nodeRep;
-        public System.Drawing.Color currentColor = System.Drawing.Color.FromArgb(198, 196, 221);
 
         public Node(string nameEntry, Depthtracker depthtracker_)
         {
@@ -44,7 +34,6 @@ namespace graphhTester
             depthtracker = depthtracker_;
             children = new List<Node>();
         }
-        //int parentDegreeCounter;
         public List<Node> isPartOf()
         {
             List<Node> output = new List<Node>();
@@ -53,13 +42,8 @@ namespace graphhTester
             {
                 output.AddRange(parent.isPartOf()); 
             }
-            else
-            {
-                //output.AddRange(output);
-            }
             return output;
         }
-        //potentiell zu Array, wenn childrensChildren getrackt würde (z.B. durch int bei jedem node und eins hochzählen bei parentParents nach Aufnahme neues Nodes
        public List<Node> includes()
         {
             List<Node> output = new List<Node>();
@@ -79,7 +63,7 @@ namespace graphhTester
             }
             return output;
         }        
-        public List<Node> isEqualTo()                        // Gibt sich selbst mit wert 0 zurück: Gut für markieren.
+        public List<Node> isEqualTo()                        
         {
             List<Node> outputNode = new List<Node> (depthtracker.getDepthList(this.depth));
             if (outputNode.Contains(depthtracker.getDepthList(1)[0])){ outputNode.Remove(depthtracker.getDepthList(1)[0]); }

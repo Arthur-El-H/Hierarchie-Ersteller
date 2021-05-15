@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace graphhTester
@@ -15,7 +11,15 @@ namespace graphhTester
         public Depthtracker depthtracker;
         public visualDepthTracker visDepthTracker;
         Control control;
-        public Form2()
+        public Node masterNode;
+        public Node varNode;
+        int buttonState;
+
+        Color equal = Color.FromArgb(255, 216, 102);
+        Color include = Color.FromArgb(217, 255, 102);
+        Color isPartOf = Color.FromArgb(255, 254, 102);
+        Color noRelation = Color.FromArgb(255, 178, 102);
+        public Form2() 
         {
             InitializeComponent();
 
@@ -30,7 +34,7 @@ namespace graphhTester
             visDepthTracker.createNewDepth();
             createmasterNode();
             control.masterNode = masterNode;
-            control.createMasterRep(masterNode);
+            control.createRep(masterNode, false, true);
             control.createPen();
 
             yesBtn.Enabled = false;
@@ -41,7 +45,6 @@ namespace graphhTester
 
             listShowCase.View = View.List;
             listShowCase.LabelWrap = true;           
-            //listShowCase.FullRowSelect = true;
         }
         public Panel getHierarchyPanel()
         {
@@ -49,40 +52,20 @@ namespace graphhTester
         }
         public void receiveRep(Label nodeRep)
         {
-            //this.Controls.Add(nodeRep);
-            hierarchyPanel.Controls.Add(nodeRep);
-            
+            hierarchyPanel.Controls.Add(nodeRep);            
         }
-        public Node masterNode;
-        public Node varNode;
+        public void AddToShowcase(string element)
+        {
+            ListViewItem item = new ListViewItem();
+            item.Text = element;
+            listShowCase.Items.Add(item);
+        }
         void createmasterNode()
-
         {
             masterNode = new Node("Root", depthtracker);
             masterNode.form1 = this;
             depthtracker.addNewRow();
             depthtracker.addToRow(0,masterNode);
-        }
-        public void enableButtons(bool enable)
-        {
-            if (enable) { yesBtn.Show(); noBtn.Show(); newNodeqst.Show(); }
-            else
-            { noBtn.Hide(); yesBtn.Hide(); newNodeqst.Hide(); }
-            yesBtn.Enabled = enable;
-            noBtn.Enabled = enable;
-        }
-        public void enableAddElement(bool enable)
-        {
-            newElementBtn.Enabled = enable;
-        }
-        int buttonState;
-        public void setButtonState(int state)
-        {
-            buttonState = state;
-        }        
-        private void newElementBtn_Click(object sender, EventArgs e)
-        {
-            control.startTesting(elementInput.Text, masterNode);
         }
         public void poseQuestion(Node child, Node parent)
         {
@@ -98,6 +81,36 @@ namespace graphhTester
             newNodeqst.Visible = false;
             newNodeQstPanel.Visible = false;
         }
+        public void enableButtons(bool enable)
+        {
+            if (enable) { yesBtn.Show(); noBtn.Show(); newNodeqst.Show(); }
+            else
+            { noBtn.Hide(); yesBtn.Hide(); newNodeqst.Hide(); }
+            yesBtn.Enabled = enable;
+            noBtn.Enabled = enable;
+        }
+        public void enableAddElement(bool enable)
+        {
+            newElementBtn.Enabled = enable;
+        }
+        public void setButtonState(int state)
+        {
+            buttonState = state;
+        }
+        public void setCurrentElement(string name)
+        {
+            currentElement.Text = name;
+        }
+
+        private void newElementBtn_Click(object sender, EventArgs e)
+        {
+            control.startTesting(elementInput.Text, masterNode);
+        }
+        private void insertAsChildBtn_Click(object sender, EventArgs e)
+        {
+            control.startTesting(elementInput.Text, control.markedRep.node);
+        }
+
         private void yesBtn_Click(object sender, EventArgs e)
         {
             switch (buttonState)
@@ -118,34 +131,6 @@ namespace graphhTester
                 case 1: enableButtons(false); control.putToTest(2); break;
                 case 2: enableButtons(false); if (control.levelFound) { control.testNext(2); } else control.testNext(1); break;
             }
-        }
-        private void testBtn_Click(object sender, EventArgs e)
-        {
-            control.startTesting("granddaddy", masterNode);
-            control.startTesting("daddy", masterNode);
-            yesBtn_Click(sender, e);
-            control.startTesting("uncle", masterNode);
-            yesBtn_Click(sender, e);
-            noBtn_Click(sender, e);
-            noBtn_Click(sender, e);
-        }
-
-        private void test_2_Click(object sender, EventArgs e)
-        {
-            control.deleteAllArrows();
-            control.redrawAllArrows();
-        }
-
-        public void AddToShowcase(string element)
-        {
-            ListViewItem item = new ListViewItem();
-            item.Text = element;
-            listShowCase.Items.Add(item);
-        }
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void testBtn_Click_1(object sender, EventArgs e)
@@ -289,10 +274,6 @@ namespace graphhTester
 
         }
 
-        Color equal      = Color.FromArgb(255, 216, 102);
-        Color include    = Color.FromArgb(217, 255, 102);
-        Color isPartOf   = Color.FromArgb(255, 254, 102);
-        Color noRelation = Color.FromArgb(255, 178, 102);
         private void includeBtn_Click(object sender, EventArgs e)
         {
             listShowCase.Items.Clear();
@@ -301,7 +282,6 @@ namespace graphhTester
             visDepthTracker.markList(nodes, include);
             control.showList(nodes);
         }
-
         private void isPartOfBtn_Click(object sender, EventArgs e)
         {
             listShowCase.Items.Clear();
@@ -309,7 +289,6 @@ namespace graphhTester
             visDepthTracker.markList(nodes, isPartOf);
             control.showList(nodes);
         }
-
         private void isEqualToBtn_Click(object sender, EventArgs e)
         {
             listShowCase.Items.Clear();
@@ -327,25 +306,9 @@ namespace graphhTester
             control.showList(nodes);
         }
 
-        public void setCurrentElement (string name)
-        {
-            currentElement.Text = name;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < depthtracker.depthRows.Count; i++)
-            { Debug.WriteLine(depthtracker.depthRows.Count); }
-        }
-
         private void exitBtn_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void insertAsChildBtn_Click(object sender, EventArgs e)
-        {
-            control.startTesting(elementInput.Text, control.markedRep.node);
         }
     }
 }

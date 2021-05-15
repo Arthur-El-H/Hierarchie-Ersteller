@@ -8,12 +8,10 @@ namespace graphhTester
     public class Depthtracker //tracks the (number of) elements in the different depths
     {
         public List<List<Node>> depthRows = new List<List<Node>>();
-
         public List<Node> getDepthList(int depth)
         {
             return depthRows[depth - 1];
         }
-
         public void addNewRow()
         {
             depthRows.Add(new List<Node>());
@@ -26,10 +24,8 @@ namespace graphhTester
         {
             return depthRows.Count;
         }
-
         public void remove(Node node)
-        {
-            
+        {            
             List<Node> Nodes = depthRows[node.depth - 1];
             Nodes.Remove(node);
         }

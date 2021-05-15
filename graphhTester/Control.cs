@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
 using System.Drawing;
-using System.Diagnostics;
 
 namespace graphhTester
 {
@@ -17,9 +14,6 @@ namespace graphhTester
         Pen pen;
         Pen eraser;
 
-        public int verticalDistance = 80;
-        public int horizontalDistance = 200;
-
         List<Point> listOfLines = new List<Point>();
         List<Node> toTest;
         Node newElement;
@@ -31,26 +25,6 @@ namespace graphhTester
         int depthCounter = 1;
         int testCounter;
         public bool levelFound;
-        Point masterLoc = new Point(300, 20);
-        public void createMasterRep(Node rep)
-        {
-            NodeRepresenter nodeRepMaster = new NodeRepresenter();
-            masterNode.nodeRep = nodeRepMaster;
-            masterNode.nodeRep.BackColor = Color.FromArgb(255, 103, 104);
-            nodeRepMaster.node = masterNode;
-            nodeRepMaster.name = masterNode.name;
-            nodeRepMaster.Text = masterNode.name;
-            nodeRepMaster.parent = null;
-            nodeRepMaster.control = this;
-            nodeRepMaster.BringToFront();
-            nodeRepMaster.Visible = true;
-            nodeRepMaster.Location = masterLoc;
-            nodeRepMaster.Font = new Font("Segeo UI", 12);
-            nodeRepMaster.Bottom = new Point(350, 60);
-            nodeRepMaster.Size = new Size(horizontalDistance / 2, verticalDistance / 2);
-            form1.receiveRep(nodeRepMaster);
-            visDepthTracker.insertNodeRepMaster(nodeRepMaster);
-        }
 
         //get new Node - Code
         #region
@@ -93,9 +67,6 @@ namespace graphhTester
 
         public void insertFirstElement()
         {
-            Debug.WriteLine("when is this happening?");
-            masterNode.amountOfIncluded++;
-            //depthCounter++;
             if (depthtracker.getDepth() < depthCounter) { depthtracker.addNewRow(); }
             insert();
         }
@@ -120,7 +91,6 @@ namespace graphhTester
         public void goDeeper()     //call if yes after first putToTest
         {
             testCounter = 1;
-            tested.amountOfIncluded++;
             testedParent = tested;
             depthCounter++;
             if(depthtracker.getDepth() < depthCounter) {  depthtracker.addNewRow(); }
@@ -202,36 +172,22 @@ namespace graphhTester
         // Representer Code
         #region
 
-        public void createRep(Node rep, bool asParent = false)
+        public void createRep(Node rep, bool asParent = false, bool asRoot = false)
         {
-            NodeRepresenter noderep = new NodeRepresenter();
-            rep.nodeRep = noderep;
-            noderep.node = rep;
-            noderep.name = rep.name;
-            noderep.Text = rep.name;
+            NodeRepresenter noderep;
+            if (asRoot) 
+            { 
+                noderep = new NodeRepresenter(rep, true);
+                visDepthTracker.insertNodeRepMaster(noderep);
+            }
+            else 
+            {  
+                noderep = new NodeRepresenter(rep);
+                if (!asParent) visDepthTracker.insertRep(noderep);
+            }
             noderep.control = this;
-            noderep.parent = rep.parent.nodeRep;
-            noderep.parent.children.Add(noderep);
-            noderep.BringToFront();
-            noderep.Visible = true;
-            noderep.Font = new Font("Segeo UI", 12);
-            noderep.depth = rep.depth;
-            noderep.Size = new Size(horizontalDistance/2, verticalDistance/2);
             form1.receiveRep(noderep);
-            if(!asParent) visDepthTracker.insertRep(noderep);
         }
-
-        /*void representNode(Node represent, Point point)
-        {
-            NodeRepresenter rep = new NodeRepresenter();
-            rep.name = represent.name;
-            rep.AutoSize = true;
-            rep.Location = point;
-            rep.Text = represent.name;
-            rep.BringToFront();
-            rep.Visible = true;
-            form1.receiveRep(rep);
-        }*/
 
         #endregion
 

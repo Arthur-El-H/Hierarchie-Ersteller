@@ -327,7 +327,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.newNodeQstPanel.ResumeLayout(false);
@@ -361,17 +360,6 @@
         private System.Windows.Forms.Button insertAsChildBtn;
 
         #endregion
-
-        /*
-        private System.Windows.Forms.Button newElementBtn;
-        private System.Windows.Forms.TextBox elementInput;
-        private System.Windows.Forms.Button yesBtn;
-        private System.Windows.Forms.Button noBtn;
-        private System.Windows.Forms.Label newNodeqst;
-        private System.Windows.Forms.Button testBtn;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        */
     }
 }
 

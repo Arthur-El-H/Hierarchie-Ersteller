@@ -29,13 +29,9 @@ namespace graphhTester
         int correctedIndex(NodeRepresenter rep)
         {
             int index = 0;
-
-            //if (visualTree.Count <= rep.depth + 1) { return 0; }
-
             int index_ = visualTree[rep.depth].FindIndex(a => a == rep);
             for (int i = 0; i < index_; i++)
             {
-                //if (visualTree[rep.depth][i].movedAlready)
                 {
                     foreach (NodeRepresenter child in visualTree[rep.depth][i].children)
                     {
@@ -46,15 +42,11 @@ namespace graphhTester
                     }
                 }
             }
-            rep.movedAlready = true;
-            Debug.WriteLine(index + " für " + rep.name);
             return index;
         }
 
         List<Node> toNotCheck = new List<Node>();
-        NodeRepresenter repsibling = new NodeRepresenter();//10.5.
-        NodeRepresenter new_Child = new NodeRepresenter();//10.5.
-        int testindex; //10.5.
+        NodeRepresenter new_Child; //10.5.
 
         public void insertRepAsParent(NodeRepresenter rep, NodeRepresenter newChild, bool notFirstTime = true)
         {
@@ -63,8 +55,6 @@ namespace graphhTester
 
             
             toNotCheck = newChild.node.includes();
-            foreach(Node node in toNotCheck) { node.nodeRep.movedAlready = false; }
-            rep.movedAlready = false;
 
             int repIndex = getRepIndex(newChild);
             for (int i = repIndex; i < visualTree[newChild.depth].Count; i++)
@@ -77,29 +67,18 @@ namespace graphhTester
             }
             if (!notFirstTime) { insertRep(rep, true, repIndex); }
             
-            Debug.WriteLine("Station 2: " + repsibling.lastChildIndex + " für " + repsibling.name);//10.5.
-
-            newChild.movedAlready = false;
             removeFromDepth(newChild);
 
             newChild.parent.children.Remove(newChild);
             newChild.parent = rep;
 
-            //newChild.depth = 0;
             insertRep(newChild);
-
-            //testindex = visualTree[rep.depth].FindIndex(a => a == rep);//10.5.
-            //repsibling = visualTree[rep.depth][testindex + 1];//10.5.
-            Debug.WriteLine("Station 3: " + repsibling.lastChildIndex + " für " + repsibling.name);//10.5.
 
             foreach (Node node in toNotCheck)
             {
-                Debug.WriteLine("Station 4: " + repsibling.lastChildIndex + " für " + repsibling.name);//10.5.
-
                 removeFromDepth(node.nodeRep);
                 node.nodeRep.depth = 0;
                 insertRep(node.nodeRep);
-                Debug.WriteLine("Station 5: " + repsibling.lastChildIndex + " für " + repsibling.name);//10.5.
             }
         }
         int getRepIndex(NodeRepresenter noderep)
@@ -112,14 +91,12 @@ namespace graphhTester
                 visualTree[noderep.depth].Remove(noderep);
                 for (int i = index; i < visualTree[noderep.parent.depth].Count; i++)
                 {
-                //10.5. if (visualTree[noderep.parent.depth][i].movedAlready)
                     if (!(toNotCheck.Contains(visualTree[noderep.parent.depth][i].node) || visualTree[noderep.parent.depth][i] == new_Child))
                     {
                         for (int j = 0; j < noderep.children.Count; j++)
                         {
                         if (visualTree[noderep.parent.depth][i].lastChildIndex > 0)
                         {
-                            Debug.WriteLine(noderep.parent.name + " gets minus");
                             visualTree[noderep.parent.depth][i].lastChildIndex--;
                         }
                         }                    
@@ -146,10 +123,6 @@ namespace graphhTester
             Debug.WriteLine(pointY + "is too big?");
             pointForDepth.Add(new Point(30, pointY));
         }
-        public int test1 =0;
-        public int test2 =0;
-        public int test3 =0;
-        public int test4 =0;
         private void placeInDepth(NodeRepresenter rep, bool specificIndex = false, int index = 0)
         {
             int index_ = visualTree[rep.parent.depth].FindIndex(a => a == rep.parent);
@@ -160,7 +133,7 @@ namespace graphhTester
             }
             else if (visualTree[rep.depth].Count == 0) 
             { 
-                Debug.WriteLine("test 1: ? " + rep.name); visualTree[rep.depth].Add(rep); test1++; 
+                visualTree[rep.depth].Add(rep); 
             }
             else if (rep.parent.lastChildIndex > visualTree[rep.depth].Count) 
             { 
@@ -168,29 +141,22 @@ namespace graphhTester
             }
             else if (visualTree[rep.depth].Count  == rep.parent.lastChildIndex) 
             { 
-                Debug.WriteLine("test 3: ? " + rep.name); visualTree[rep.depth].Add(rep); test3++; 
+                visualTree[rep.depth].Add(rep);
             }
             else 
             {
                 visualTree[rep.depth].Insert(rep.parent.lastChildIndex, rep); //10.5.
-                Debug.WriteLine("test 4: ? " + rep.name); test4++;
             }
 
 
             for (int i = index_; i < visualTree[rep.parent.depth].Count; i++)
             {
-                //if (!toNotCheck.Contains(visualTree[rep.parent.depth][i].node))
-                Debug.WriteLine(rep.name + " is being placed");
-                //if (visualTree[rep.parent.depth][i].movedAlready) //10.5.
                 {   visualTree[rep.parent.depth][i].lastChildIndex++; }
             }            
 
             replaceDepth(rep.depth);
 
             rep.lastChildIndex = correctedIndex(rep);
-            Debug.WriteLine("hierher gelange ich");
-            //if (rep.parent == masterRep) { Debug.WriteLine("ayyyy"); masterRep.lastChildIndex++; }
-            //indexForInsert(rep);
         }
         private void replaceDepth(int depth)
         {
@@ -203,15 +169,6 @@ namespace graphhTester
                 //set anchorpoints
                 visualTree[depth][i].Bottom = new Point(newLoc.X + 50, newLoc.Y + 40);
                 visualTree[depth][i].Top =    new Point(newLoc.X + 50, newLoc.Y);
-            }
-        }
-        private void giveNewRowTo(int depth)
-        {
-            amountOfRows[depth]++;
-            for (int i = depth + 1; i < visualTree.Count; i++)
-            {
-                pointForDepth[i] = new Point(pointForDepth[i].X, pointForDepth[i].Y + verticalDistance);
-                replaceDepth(i);
             }
         }
 
