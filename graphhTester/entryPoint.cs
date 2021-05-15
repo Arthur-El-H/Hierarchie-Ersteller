@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace graphhTester
 {
-    public class Program
+    public class entryPoint
     {
         //public Manager manager;
 
@@ -20,7 +20,7 @@ namespace graphhTester
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form2());
+            Application.Run(new mainscreen_form());
         }
     }
 }

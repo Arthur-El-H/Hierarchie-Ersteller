@@ -1,6 +1,6 @@
 ﻿namespace graphhTester
 {
-    partial class Form2
+    partial class mainscreen_form
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainscreen_form));
             this.yesBtn = new System.Windows.Forms.Button();
             this.noBtn = new System.Windows.Forms.Button();
             this.newElementBtn = new System.Windows.Forms.Button();

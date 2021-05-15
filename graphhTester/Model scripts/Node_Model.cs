@@ -16,27 +16,26 @@ namespace graphhTester
     }
 
     */
-    public class Node
+    public class Node_Model: IModel
     {
         public string name;
-        public NodeRepresenter nodeRep;
-        public Node parent;
-        public List<Node> children = new List<Node>();
+        public NodeRepresenter_Viewer nodeRep;
+        public Node_Model parent;
+        public List<Node_Model> children = new List<Node_Model>();
         public System.Drawing.Color currentColor = System.Drawing.Color.FromArgb(198, 196, 221);
         public int depth = 0;
 
-        public Depthtracker depthtracker;
-        public Form2 form1;
+        private Depthtracker depthtracker;
 
-        public Node(string nameEntry, Depthtracker depthtracker_)
+        public Node_Model(string nameEntry, Depthtracker depthtracker_)
         {
             name = nameEntry;
             depthtracker = depthtracker_;
-            children = new List<Node>();
+            children = new List<Node_Model>();
         }
-        public List<Node> isPartOf()
+        public List<Node_Model> isPartOf()
         {
-            List<Node> output = new List<Node>();
+            List<Node_Model> output = new List<Node_Model>();
             output.Add(parent);
             if (parent.parent != null)
             {
@@ -44,37 +43,37 @@ namespace graphhTester
             }
             return output;
         }
-       public List<Node> includes()
+        public List<Node_Model> includes()
         {
-            List<Node> output = new List<Node>();
-            foreach (Node child in children)
+            List<Node_Model> output = new List<Node_Model>();
+            foreach (Node_Model child in children)
             {
                 output.Add(child);
                 if (child.children.Count > 0) { output.AddRange(child.includes()); }
             }
             return output;
         }
-        Node getParent(int degree)
+        private Node_Model getParent(int degree)
         {
-            Node output = this;
+            Node_Model output = this;
             for (int i = 0; i < degree; i++)
             {
                 output = output.parent;
             }
             return output;
         }        
-        public List<Node> isEqualTo()                        
+        public List<Node_Model> isEqualTo()                        
         {
-            List<Node> outputNode = new List<Node> (depthtracker.getDepthList(this.depth));
+            List<Node_Model> outputNode = new List<Node_Model> (depthtracker.getDepthList(this.depth));
             if (outputNode.Contains(depthtracker.getDepthList(1)[0])){ outputNode.Remove(depthtracker.getDepthList(1)[0]); }
             outputNode.Remove(this);
             return outputNode;
         }
-        public List<Node> hasNoRelationTo()
+        public List<Node_Model> hasNoRelationTo()
         {
-            List<Node> output = new List<Node>();
-            Node varNode = this.getParent(depth - 1);
-            List<Node> parentsEquals = new List<Node>(varNode.isEqualTo());
+            List<Node_Model> output = new List<Node_Model>();
+            Node_Model varNode = this.getParent(depth - 1);
+            List<Node_Model> parentsEquals = new List<Node_Model>(varNode.isEqualTo());
             output.AddRange(parentsEquals);
             for (int i = 0; i < parentsEquals.Count; i++)
             {

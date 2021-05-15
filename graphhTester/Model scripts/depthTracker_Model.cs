@@ -5,18 +5,19 @@ using System.Windows.Forms;
 
 namespace graphhTester
 {
-    public class Depthtracker //tracks the (number of) elements in the different depths
+    public class Depthtracker: IModel
+        //tracks the (number of) elements in the different depths
     {
-        public List<List<Node>> depthRows = new List<List<Node>>();
-        public List<Node> getDepthList(int depth)
+        private List<List<Node_Model>> depthRows = new List<List<Node_Model>>();
+        public List<Node_Model> getDepthList(int depth)
         {
             return depthRows[depth - 1];
         }
         public void addNewRow()
         {
-            depthRows.Add(new List<Node>());
+            depthRows.Add(new List<Node_Model>());
         }
-        public void addToRow(int depth, Node node)
+        public void addToRow(int depth, Node_Model node)
         {
             depthRows[depth].Add(node);
         }
@@ -24,11 +25,10 @@ namespace graphhTester
         {
             return depthRows.Count;
         }
-        public void remove(Node node)
+        public void remove(Node_Model node)
         {            
-            List<Node> Nodes = depthRows[node.depth - 1];
+            List<Node_Model> Nodes = depthRows[node.depth - 1];
             Nodes.Remove(node);
         }
-
     }
 }

@@ -7,33 +7,29 @@ using System.Diagnostics;
 
 namespace graphhTester
 {
-    public class visualDepthTracker
+    public class hierarchy_Viewer : Iview
     {
-        List <List<NodeRepresenter>> visualTree = new List<List<NodeRepresenter>>();
-        List <int> amountOfRows = new List<int>();
-        List<Point> pointForDepth = new List<Point>(); //holds (0/0) for every depth
+        private List <List<NodeRepresenter_Viewer>> visualTree = new List<List<NodeRepresenter_Viewer>>();
+        private List <int> amountOfRows = new List<int>();
+        private List<Point> pointForDepth = new List<Point>(); //holds (0/0) for every depth
 
-        int verticalDistance = 80;
-        int horizontalDistance = 150;
+        private int verticalDistance = 80;
+        private int horizontalDistance = 150;
 
-        public NodeRepresenter masterRep;
-        public Control control;
-
-        public void insertNodeRepMaster(NodeRepresenter master)
+        public void insertNodeRepMaster(NodeRepresenter_Viewer master)
         {
             master.lastChildIndex = 0;
             master.depth = 0;
             visualTree[0].Add(master);
-            masterRep = master;
         }
-        int correctedIndex(NodeRepresenter rep)
+        private int correctedIndex(NodeRepresenter_Viewer rep)
         {
             int index = 0;
             int index_ = visualTree[rep.depth].FindIndex(a => a == rep);
             for (int i = 0; i < index_; i++)
             {
                 {
-                    foreach (NodeRepresenter child in visualTree[rep.depth][i].children)
+                    foreach (NodeRepresenter_Viewer child in visualTree[rep.depth][i].children)
                     {
                         if (visualTree[rep.depth + 1].Contains(child))
                         {
@@ -45,10 +41,10 @@ namespace graphhTester
             return index;
         }
 
-        List<Node> toNotCheck = new List<Node>();
-        NodeRepresenter new_Child; //10.5.
+        private List<Node_Model> toNotCheck = new List<Node_Model>();
+        private NodeRepresenter_Viewer new_Child; //10.5.
 
-        public void insertRepAsParent(NodeRepresenter rep, NodeRepresenter newChild, bool notFirstTime = true)
+        public void insertRepAsParent(NodeRepresenter_Viewer rep, NodeRepresenter_Viewer newChild, bool notFirstTime = true)
         {
             rep.children.Add(newChild);
             new_Child = newChild;
@@ -74,18 +70,18 @@ namespace graphhTester
 
             insertRep(newChild);
 
-            foreach (Node node in toNotCheck)
+            foreach (Node_Model node in toNotCheck)
             {
                 removeFromDepth(node.nodeRep);
                 node.nodeRep.depth = 0;
                 insertRep(node.nodeRep);
             }
         }
-        int getRepIndex(NodeRepresenter noderep)
+        private int getRepIndex(NodeRepresenter_Viewer noderep)
         {
             return visualTree[noderep.depth].FindIndex(a => a == noderep);
         }
-        void removeFromDepth(NodeRepresenter noderep, NodeRepresenter rep = null) //in visual tree only - parenthood/childhood is organized seperately
+        private void removeFromDepth(NodeRepresenter_Viewer noderep, NodeRepresenter_Viewer rep = null) //in visual tree only - parenthood/childhood is organized seperately
         {
                 int index = visualTree[noderep.parent.depth].FindIndex(a => a == noderep.parent);
                 visualTree[noderep.depth].Remove(noderep);
@@ -104,7 +100,7 @@ namespace graphhTester
                 }
             replaceDepth(noderep.depth);
         }
-        public void insertRep(NodeRepresenter repC, bool specificIndex = false, int index = 0)
+        public void insertRep(NodeRepresenter_Viewer repC, bool specificIndex = false, int index = 0)
         {
             repC.depth = repC.parent.depth + 1;
             Debug.WriteLine(repC.parent.name + "oder was");
@@ -115,7 +111,7 @@ namespace graphhTester
         }
         public void createNewDepth()
         {
-            visualTree.Add(new List<NodeRepresenter>());
+            visualTree.Add(new List<NodeRepresenter_Viewer>());
             amountOfRows.Add(1);
             int pointY = 40;
             Debug.WriteLine(amountOfRows.Count);
@@ -123,7 +119,7 @@ namespace graphhTester
             Debug.WriteLine(pointY + "is too big?");
             pointForDepth.Add(new Point(30, pointY));
         }
-        private void placeInDepth(NodeRepresenter rep, bool specificIndex = false, int index = 0)
+        private void placeInDepth(NodeRepresenter_Viewer rep, bool specificIndex = false, int index = 0)
         {
             int index_ = visualTree[rep.parent.depth].FindIndex(a => a == rep.parent);
             
@@ -172,17 +168,17 @@ namespace graphhTester
             }
         }
 
-        List <Node> markedNodes = new List<Node>();
-        Color standartColor = Color.FromArgb(198, 196, 221);
-        public void markList(List<Node> nodes, Color color)
+        private List <Node_Model> markedNodes = new List<Node_Model>();
+        private Color standartColor = Color.FromArgb(198, 196, 221);
+        public void markList(List<Node_Model> nodes, Color color)
         {
             colornodesList(markedNodes, standartColor);
             markedNodes = nodes;
             colornodesList(nodes, color);
         }
-        public void colornodesList(List<Node> nodes, Color color)
+        private void colornodesList(List<Node_Model> nodes, Color color)
         {
-            foreach(Node node in nodes)
+            foreach(Node_Model node in nodes)
             {
                 node.nodeRep.BackColor = color;
                 node.currentColor = color;

@@ -6,36 +6,41 @@ using System.Windows.Forms;
 
 namespace graphhTester
 {
-    public partial class Form2 : Form
+    public partial class mainscreen_form : Form
     {
-        public Depthtracker depthtracker;
-        public visualDepthTracker visDepthTracker;
-        Control control;
-        public Node masterNode;
-        public Node varNode;
-        int buttonState;
+        private Depthtracker depthtracker;
+        private hierarchy_Viewer hierarchyV;
+        private node_Controller node_Controller;
+        private visuals_Controller visController;
 
-        Color equal = Color.FromArgb(255, 216, 102);
-        Color include = Color.FromArgb(217, 255, 102);
-        Color isPartOf = Color.FromArgb(255, 254, 102);
-        Color noRelation = Color.FromArgb(255, 178, 102);
-        public Form2() 
+        private Node_Model masterNode;
+        private Node_Model varNode;
+        private int buttonState;
+
+        private Color equal = Color.FromArgb(255, 216, 102);
+        private Color include = Color.FromArgb(217, 255, 102);
+        private Color isPartOf = Color.FromArgb(255, 254, 102);
+        private Color noRelation = Color.FromArgb(255, 178, 102);
+
+        public mainscreen_form() 
         {
             InitializeComponent();
 
-            control = new Control();
+            node_Controller = new node_Controller();
             depthtracker = new Depthtracker();
-            visDepthTracker = new visualDepthTracker();
-            control.visDepthTracker = visDepthTracker;
-            control.depthtracker = depthtracker;
-            control.form1 = this;
-            visDepthTracker.control = control;
+            hierarchyV = new hierarchy_Viewer();
+            visController = new visuals_Controller(hierarchyV, this);
+            node_Controller.setHierarchyV(hierarchyV);
+            node_Controller.setDepthtracker(depthtracker);
+            node_Controller.setMainForm(this);
+            node_Controller.setVisController(visController);
 
-            visDepthTracker.createNewDepth();
+            hierarchyV.createNewDepth();
             createmasterNode();
-            control.masterNode = masterNode;
-            control.createRep(masterNode, false, true);
-            control.createPen();
+            visController.masterNode = masterNode;
+            node_Controller.masterNode = masterNode;
+            visController.createRep(masterNode, false, true);
+            visController.createPen();
 
             yesBtn.Enabled = false;
             noBtn.Enabled = false;
@@ -60,14 +65,13 @@ namespace graphhTester
             item.Text = element;
             listShowCase.Items.Add(item);
         }
-        void createmasterNode()
+        private void createmasterNode()
         {
-            masterNode = new Node("Root", depthtracker);
-            masterNode.form1 = this;
+            masterNode = new Node_Model("Root", depthtracker);
             depthtracker.addNewRow();
             depthtracker.addToRow(0,masterNode);
         }
-        public void poseQuestion(Node child, Node parent)
+        public void poseQuestion(Node_Model child, Node_Model parent)
         {
             newNodeqst.Visible = true;
             newNodeQstPanel.Visible = true;
@@ -104,79 +108,79 @@ namespace graphhTester
 
         private void newElementBtn_Click(object sender, EventArgs e)
         {
-            control.startTesting(elementInput.Text, masterNode);
+            node_Controller.startTesting(elementInput.Text, masterNode);
         }
         private void insertAsChildBtn_Click(object sender, EventArgs e)
         {
-            control.startTesting(elementInput.Text, control.markedRep.node);
+            node_Controller.startTesting(elementInput.Text, visController.markedRep.node);
         }
 
         private void yesBtn_Click(object sender, EventArgs e)
         {
             switch (buttonState)
             {
-                case 1: enableButtons(false); control.goDeeper(); break;
+                case 1: enableButtons(false); node_Controller.goDeeper(); break;
                 case 2: enableButtons(false); 
-                    if (control.levelFound)
+                    if (node_Controller.levelFound)
                     {
-                        control.insertAsParentAndGoToNext();
+                        node_Controller.insertAsParentAndGoToNext();
                     }
-                    else { control.startInsertingAsParent(); } break;
+                    else { node_Controller.startInsertingAsParent(); } break;
             }
         }
         private void noBtn_Click(object sender, EventArgs e)
         {
             switch (buttonState)
             {
-                case 1: enableButtons(false); control.putToTest(2); break;
-                case 2: enableButtons(false); if (control.levelFound) { control.testNext(2); } else control.testNext(1); break;
+                case 1: enableButtons(false); node_Controller.putToTest(2); break;
+                case 2: enableButtons(false); if (node_Controller.levelFound) { node_Controller.testNext(2); } else node_Controller.testNext(1); break;
             }
         }
 
         private void testBtn_Click_1(object sender, EventArgs e)
         {
             listShowCase.Clear();
-            control.startTesting("Kleidung", masterNode);
-            control.startTesting("Poloshirt", masterNode);
+            node_Controller.startTesting("Kleidung", masterNode);
+            node_Controller.startTesting("Poloshirt", masterNode);
             yesBtn_Click(sender, e);
-            control.startTesting("Festnetz", masterNode);
+            node_Controller.startTesting("Festnetz", masterNode);
             noBtn_Click(sender, e);
             noBtn_Click(sender, e);
-            control.startTesting("iPhone 12", masterNode);
-            noBtn_Click(sender, e);
-            noBtn_Click(sender, e);
-            noBtn_Click(sender, e);
-            noBtn_Click(sender, e);
-            control.startTesting("grün", masterNode);
-            yesBtn_Click(sender, e);
-            yesBtn_Click(sender, e);
-            control.startTesting("Elektronik", masterNode);
+            node_Controller.startTesting("iPhone 12", masterNode);
             noBtn_Click(sender, e);
             noBtn_Click(sender, e);
             noBtn_Click(sender, e);
+            noBtn_Click(sender, e);
+            node_Controller.startTesting("grün", masterNode);
             yesBtn_Click(sender, e);
             yesBtn_Click(sender, e);
-            control.startTesting("T-Shirts", masterNode);
+            node_Controller.startTesting("Elektronik", masterNode);
+            noBtn_Click(sender, e);
+            noBtn_Click(sender, e);
+            noBtn_Click(sender, e);
+            yesBtn_Click(sender, e);
+            yesBtn_Click(sender, e);
+            node_Controller.startTesting("T-Shirts", masterNode);
             yesBtn_Click(sender, e);
             noBtn_Click(sender, e);
             noBtn_Click(sender, e);
 
-            control.startTesting("Oberbekleidung", masterNode);
-            yesBtn_Click(sender, e);
-            noBtn_Click(sender, e);
-            yesBtn_Click(sender, e);
-            yesBtn_Click(sender, e);
-
-            control.startTesting("Telefone", masterNode);
-            noBtn_Click(sender, e);
-            noBtn_Click(sender, e);
+            node_Controller.startTesting("Oberbekleidung", masterNode);
             yesBtn_Click(sender, e);
             noBtn_Click(sender, e);
             yesBtn_Click(sender, e);
             yesBtn_Click(sender, e);
 
-            
-            control.startTesting("black", masterNode);
+            node_Controller.startTesting("Telefone", masterNode);
+            noBtn_Click(sender, e);
+            noBtn_Click(sender, e);
+            yesBtn_Click(sender, e);
+            noBtn_Click(sender, e);
+            yesBtn_Click(sender, e);
+            yesBtn_Click(sender, e);
+
+
+            node_Controller.startTesting("black", masterNode);
             noBtn_Click(sender, e);
             noBtn_Click(sender, e);
             yesBtn_Click(sender, e);
@@ -185,12 +189,12 @@ namespace graphhTester
             noBtn_Click(sender, e);
             yesBtn_Click(sender, e);
 
-            control.startTesting("Unterbekleidung", masterNode);
+            node_Controller.startTesting("Unterbekleidung", masterNode);
             yesBtn_Click(sender, e);
             noBtn_Click(sender, e);
             noBtn_Click(sender, e);
 
-            control.startTesting("Softshelljacke blau M", masterNode);
+            node_Controller.startTesting("Softshelljacke blau M", masterNode);
             yesBtn_Click(sender, e);
             yesBtn_Click(sender, e);
             noBtn_Click(sender, e);
@@ -198,8 +202,8 @@ namespace graphhTester
             noBtn_Click(sender, e);
             noBtn_Click(sender, e);
 
-            
-            control.startTesting("iPhone 12 64GB", masterNode);
+
+            node_Controller.startTesting("iPhone 12 64GB", masterNode);
             noBtn_Click(sender, e);
             noBtn_Click(sender, e);
             yesBtn_Click(sender, e);
@@ -210,22 +214,22 @@ namespace graphhTester
             noBtn_Click(sender, e);
             yesBtn_Click(sender, e);
 
-            control.startTesting("Poloshirt", masterNode);
+            node_Controller.startTesting("Poloshirt", masterNode);
             yesBtn_Click(sender, e);
             yesBtn_Click(sender, e);
             yesBtn_Click(sender, e);
             noBtn_Click(sender, e);
             yesBtn_Click(sender, e);
 
-            control.startTesting("Poloshirt grün L", masterNode);
+            node_Controller.startTesting("Poloshirt grün L", masterNode);
             yesBtn_Click(sender, e);
             yesBtn_Click(sender, e);
             yesBtn_Click(sender, e);
             yesBtn_Click(sender, e);
             yesBtn_Click(sender, e);
 
-            
-            control.startTesting("Softshelljacke blau", masterNode);
+
+            node_Controller.startTesting("Softshelljacke blau", masterNode);
             yesBtn_Click(sender, e);
             yesBtn_Click(sender, e);
             noBtn_Click(sender, e);
@@ -235,8 +239,8 @@ namespace graphhTester
             noBtn_Click(sender, e);
             yesBtn_Click(sender, e);
 
-            
-            control.startTesting("Smartphones", masterNode);
+
+            node_Controller.startTesting("Smartphones", masterNode);
             noBtn_Click(sender, e);
             noBtn_Click(sender, e);
             yesBtn_Click(sender, e);
@@ -246,7 +250,7 @@ namespace graphhTester
             noBtn_Click(sender, e);
             yesBtn_Click(sender, e);
 
-            control.startTesting("Silver", masterNode);
+            node_Controller.startTesting("Silver", masterNode);
             noBtn_Click(sender, e);
             noBtn_Click(sender, e);
             yesBtn_Click(sender, e);
@@ -259,7 +263,7 @@ namespace graphhTester
             noBtn_Click(sender, e);
             noBtn_Click(sender, e);
 
-            control.startTesting("grün M", masterNode);
+            node_Controller.startTesting("grün M", masterNode);
             yesBtn_Click(sender, e);
             yesBtn_Click(sender, e);
             yesBtn_Click(sender, e);
@@ -277,33 +281,33 @@ namespace graphhTester
         private void includeBtn_Click(object sender, EventArgs e)
         {
             listShowCase.Items.Clear();
-            List<Node> nodes = new List<Node>();
-            nodes = control.markedRep.node.includes();
-            visDepthTracker.markList(nodes, include);
-            control.showList(nodes);
+            List<Node_Model> nodes = new List<Node_Model>();
+            nodes = visController.markedRep.node.includes();
+            hierarchyV.markList(nodes, include);
+            visController.showList(nodes);
         }
         private void isPartOfBtn_Click(object sender, EventArgs e)
         {
             listShowCase.Items.Clear();
-            List<Node> nodes = control.markedRep.node.isPartOf();
-            visDepthTracker.markList(nodes, isPartOf);
-            control.showList(nodes);
+            List<Node_Model> nodes = visController.markedRep.node.isPartOf();
+            hierarchyV.markList(nodes, isPartOf);
+            visController.showList(nodes);
         }
         private void isEqualToBtn_Click(object sender, EventArgs e)
         {
             listShowCase.Items.Clear();
-            List<Node> nodes = new List<Node>();
-            nodes = control.markedRep.node.isEqualTo();
-            visDepthTracker.markList(nodes, equal);
-            control.showList(nodes);
+            List<Node_Model> nodes = new List<Node_Model>();
+            nodes = visController.markedRep.node.isEqualTo();
+            hierarchyV.markList(nodes, equal);
+            visController.showList(nodes);
         }
         private void noRelationToBtn_Click(object sender, EventArgs e)
         {
             listShowCase.Items.Clear();
-            List<Node> nodes = new List<Node>();
-            nodes = control.markedRep.node.hasNoRelationTo();
-            visDepthTracker.markList(nodes, noRelation);
-            control.showList(nodes);
+            List<Node_Model> nodes = new List<Node_Model>();
+            nodes = visController.markedRep.node.hasNoRelationTo();
+            hierarchyV.markList(nodes, noRelation);
+            visController.showList(nodes);
         }
 
         private void exitBtn_Click(object sender, EventArgs e)
